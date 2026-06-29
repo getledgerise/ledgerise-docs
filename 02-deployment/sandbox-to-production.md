@@ -39,8 +39,8 @@ Take the time to work through this checklist in sandbox mode. It is designed to 
 
 ### chart of accounts
 
-- [ ] COA has been synced from your accounting system (Settings → COA Reference → Sync Now).
-- [ ] The synced account list includes the accounts your finance team expects to use in mapping rules.
+- [ ] COA has been imported from your accounting system (Settings → COA Reference → Import COA).
+- [ ] The imported account list includes the accounts your finance team expects to use in mapping rules.
 
 ### mapping rules
 
@@ -52,10 +52,12 @@ Take the time to work through this checklist in sandbox mode. It is designed to 
 
 - [ ] A suspense account code is configured in Settings → System. This is the COA account where unmapped transactions will be posted. Without it, unmapped transactions cannot be safely held.
 
-### reconciliation (if applicable)
+### reconciliation
 
 - [ ] Report sources have been created for each counterparty statement type (Settings → Report Sources).
 - [ ] Reconciliation rules have been configured for each report source.
+
+> The posting gate defaults to `disabled`, so reconciliation never blocks journal posting unless you configure it to. That does not make reconciliation optional — it is a standard part of the Ledgerise core loop. Set up at least one report source and one Reference Matching rule before your first real counterparty statement arrives, so you are not reconciling retroactively.
 
 ---
 
@@ -76,7 +78,7 @@ What is **not** cleared:
 - Adapter configuration
 - Mapping rules
 - User accounts
-- System settings (COA sync, suspense account, etc.)
+- System settings (COA import, suspense account, etc.)
 - Report sources and reconciliation rules
 
 > Once you reset sandbox data and activate your license, there is no path back to sandbox mode without a fresh deployment. Make sure your setup is correct before you proceed.

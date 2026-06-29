@@ -17,6 +17,7 @@ Make sure you have the following ready:
 - Credentials for your accounting system. For Zoho Books: your Client ID, Client Secret, and Organization ID.
 - Access to your accounting system to view your chart of accounts.
 - A list of your transaction product lines and billers — you will need these when creating mapping rules.
+- A sample statement (CSV) from your primary payment provider or bank — you will use this to set up reconciliation.
 
 ---
 
@@ -54,12 +55,12 @@ If you are not yet ready to connect your accounting system, use the `journal-csv
 
 ---
 
-## step 3 — sync your chart of accounts
+## step 3 — import your chart of accounts
 
 Ledgerise needs a copy of your chart of accounts so your finance team can select the right accounts when creating mapping rules.
 
 1. Go to **Settings → COA Reference**.
-2. Click **Sync Now**.
+2. Click **Import COA**.
 3. Ledgerise pulls your account list from the connected accounting system. Your accounts appear within a few seconds, listed with their codes, names, and types.
 
 If you are using the `journal-csv` adapter and there is no direct accounting system connection, skip this step for now. You will enter account codes manually when creating mapping rules.
@@ -116,7 +117,22 @@ Repeat for each product line and biller your platform handles.
 
 ---
 
-## step 6 — import a test batch or trigger a webhook
+## step 6 — set up reconciliation
+
+Reconciliation verifies your internal transaction records against external statements from your payment providers and banks. Set up the basics now, before live data starts flowing in.
+
+1. Go to **Reconciliation → Import Statement** and import your sample provider statement.
+2. Ledgerise creates a **report source** for it automatically — a saved identity combining the counterparty and statement type, for example `Paystack — Settlement Report`.
+3. Go to **Reconciliation → Rules** and configure at least one **Reference Matching** rule for that report source. This is the minimum required for the matching engine to pair internal and external records.
+4. Run the import again (or trigger a reconciliation run) and check the resulting match rate before you go live.
+
+By default, the posting gate is **disabled** — reconciliation status does not block journal posting, and the engine continues to post completed transactions on its normal schedule regardless of match status. You can tighten this later in Settings → System if you want posting to wait on reconciliation.
+
+→ Full instructions: [reconciliation overview](../04-reconciliation/overview.md) | [reconciliation rules](../04-reconciliation/reconciliation-rules.md)
+
+---
+
+## step 7 — import a test batch or trigger a webhook
 
 Now that adapters and rules are configured, bring in some transaction data to verify the setup.
 
@@ -130,7 +146,7 @@ After a few moments, go to the **Transactions** page. Your imported records shou
 
 ---
 
-## step 7 — run the engine and check the journal log
+## step 8 — run the engine and check the journal log
 
 The journal engine runs on its configured schedule. For your first test, trigger a manual run:
 
@@ -153,7 +169,7 @@ Here is what each outcome means and what to do:
 
 ---
 
-## step 8 — invite your team
+## step 9 — invite your team
 
 Once entries are posting correctly, bring in the rest of your team before going live.
 
@@ -166,7 +182,7 @@ Once entries are posting correctly, bring in the rest of your team before going 
 
 ---
 
-## step 9 — go live
+## step 10 — go live
 
 When you are satisfied that transactions are flowing in and journal entries are posting correctly, follow these steps to switch from sandbox to production:
 
@@ -189,6 +205,7 @@ For the first 48–72 hours, check the following each day:
 - **Transactions page stat bar** — is today's transaction count what you expect?
 - **Mapping Rules → Unmapped Today** — if this is non-zero, you have transactions without a matching rule. Create the missing rules.
 - **Journal Log** — are entries posting on schedule? Are there any failed or retry-exhausted entries that need attention?
+- **Reconciliation → Breaks** — are breaks being raised and resolved at a reasonable pace? A growing backlog of open breaks usually means a reconciliation rule needs adjusting.
 - **Exceptions badge** in the top navigation bar — this count aggregates all open issues across unmapped transactions, failed postings, and reconciliation breaks. A non-zero count means something needs your attention.
 
 Most operators reach a steady state within the first week, with an unmapped rate below 2% of daily transaction volume.

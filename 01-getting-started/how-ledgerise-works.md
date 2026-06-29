@@ -1,29 +1,37 @@
 # how ledgerise works
 
-This page explains the architecture and the data flow inside Ledgerise. You do not need to understand all of this to use the product day to day, but it is helpful context before you start configuring adapters and mapping rules.
+This page explains the architecture and the data flow inside Ledgerise. You do not need to understand all of this to use the product day to day, but it is helpful context before you start configuring adapters, reconciliation, and mapping rules.
 
 ---
 
 ## the three layers
 
-Ledgerise is built in three layers. Each layer has a single, clear responsibility. They are kept deliberately separate so that adding a new payment provider or a new accounting system requires only a new adapter — the logic in the middle never changes.
+Ledgerise is built in three architectural layers — inbound adapters, the journal engine, and outbound adapters. Each layer has a single, clear responsibility, and they are kept deliberately separate so that adding a new payment provider or a new accounting system requires only a new adapter — the logic in the middle never changes.
+
+Sitting between ingestion and the engine is reconciliation: a distinct stage in the data flow where internal transaction records are verified against external counterparty statements before they are classified and posted. The full flow through Ledgerise is: **Transactions in → Reconciliation → Classification → Journal entries out.**
 
 ```
-Source System              Ledgerise Core                    Accounting System
-─────────────              ──────────────                    ─────────────────
+Source System              Ledgerise Core                                            Accounting System
+─────────────              ──────────────                                            ─────────────────
 
-Webhook JSON    ──►                                         
-CSV Upload      ──►   Inbound Adapters   ──►   Journal   ──►   Zoho Books
-API Poll        ──►   (normalize data)         Engine    ──►   Journal CSV
-Any System      ──►                         (map + post) ──►   QuickBooks
+Webhook JSON    ──►                                                                
+CSV Upload      ──►   Inbound      ──►   Reconciliation   ──►   Journal   ──►   Zoho Books
+API Poll        ──►   Adapters           (verify against        Engine    ──►   Journal CSV
+Any System      ──►   (normalize)         statements)        (map + post) ──►   QuickBooks
+                                                ▲
+                                                │
+                                      Provider / Bank Statement
+                                        (CSV or report import)
                               │
                               ▼
                        Internal Database
-                       (transactions, rules,
-                        journal entries)
+                       (transactions, rules, recon
+                        runs, journal entries)
 ```
 
-[SCREENSHOT: Ledgerise system architecture diagram showing inbound adapters on the left feeding into the journal engine, which sends output to outbound adapters on the right, with the internal database shown below the engine]
+Reconciliation does not have to block posting — a configurable posting gate (default `disabled`) determines whether journal entries wait on reconciliation status. With the default setting, the engine posts from completed transactions regardless of reconciliation status, and reconciliation runs as an independent verification process.
+
+[SCREENSHOT: Ledgerise system architecture diagram showing inbound adapters on the left feeding into the reconciliation stage, then the journal engine, which sends output to outbound adapters on the right, with the internal database shown below]
 
 ---
 
@@ -60,6 +68,21 @@ The schema captures the essentials of every transaction:
 Why does this matter? Because once a transaction is in the canonical schema, the journal engine does not need to know it came from Paystack or from a CSV export. It sees a completed airtime payment on the consumer-app product line, matches it to the right mapping rule, and posts the journal entry. The mapping rules, engine logic, and outbound adapters are all written once, for one schema.
 
 → See [transaction schema reference](../12-reference/transaction-schema.md)
+
+---
+
+### reconciliation
+
+Reconciliation is the verification stage between ingestion and posting. When you import an external statement — a payment provider's settlement report or a bank statement — Ledgerise compares it against your internal transaction records for the same period.
+
+The reconciliation run produces two outcomes:
+
+- **Match records** — confirmed pairs where the internal and external records agree within configured tolerances. No action needed.
+- **Break records** — discrepancies that could not be automatically resolved, such as a missing record on one side, an amount mismatch, or a timing difference. These go into an exception queue for your finance team to review and close.
+
+Reconciliation rules — separate from mapping rules — control how records are paired and compared for each report source. By default, reconciliation status does not gate journal posting (the posting gate is `disabled`), so the engine continues to post completed transactions on its normal schedule. You can configure a stricter posting gate if you want journal entries to wait until a transaction is matched or a break is resolved.
+
+→ See [reconciliation overview](../04-reconciliation/overview.md)
 
 ---
 

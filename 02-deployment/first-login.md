@@ -39,7 +39,7 @@ The Sandbox badge tells you the deployment is in sandbox mode. In sandbox mode:
 - All transactions you import are treated as demo data.
 - The default admin account (`admin@ledgerise.dev`) cannot be deleted or demoted.
 
-Sandbox mode is the safe environment to finish your setup — configure adapters, sync your chart of accounts, build mapping rules, and run test imports without any risk.
+Sandbox mode is the safe environment to finish your setup — configure adapters, import your chart of accounts, build mapping rules, and run test imports without any risk.
 
 ---
 
@@ -48,7 +48,7 @@ Sandbox mode is the safe environment to finish your setup — configure adapters
 Use sandbox mode to complete the following before activating your commercial license:
 
 1. **Connect your accounting system** — Settings → Adapters → configure the Zoho Books (or journal-csv) outbound adapter.
-2. **Sync your chart of accounts** — Settings → COA Reference → Sync Now.
+2. **Import your chart of accounts** — Settings → COA Reference → Import COA.
 3. **Configure an inbound adapter** — Settings → Adapters → configure your webhook, CSV, or poll adapter.
 4. **Build your mapping rules** — Mapping Rules → Add Rule. Create a rule for each product line and biller combination your platform handles.
 5. **Import test transactions** — use the CSV adapter to upload a sample batch, or send a test webhook payload.

@@ -30,7 +30,7 @@ The schema captures the essentials of a transaction: amount, currency, direction
 
 The structured list of account codes used in your accounting system — assets, liabilities, income, expenses, and so on. Ledgerise does not own or manage your chart of accounts. It imports a read-only copy from your accounting system (Zoho Books, or QuickBooks when supported) and uses it as a reference when your finance team configures mapping rules.
 
-You manage your COA in your accounting system. When you make changes there, sync the updated list into Ledgerise from Settings → COA Reference.
+You manage your COA in your accounting system. When you make changes there, import the updated list into Ledgerise from Settings → COA Reference.
 
 → See [chart of accounts](../05-mapping-rules/chart-of-accounts.md)
 
@@ -111,6 +111,8 @@ The suspense account is a safety net. No transaction is ever dropped or silently
 ---
 
 ## reconciliation run
+
+In the Ledgerise core loop — Transactions in → Reconciliation → Classification → Journal entries out — reconciliation is the verification stage. It sits between ingestion and journal posting: internal transaction records are compared against external counterparty statements before mapping rules classify and post them.
 
 A reconciliation run is triggered when you import an external statement — from a payment provider or bank — into Ledgerise. The run compares your internal transaction records against the external records for the same period to find matches and discrepancies.
 

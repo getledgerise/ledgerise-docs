@@ -112,7 +112,7 @@ Steps:
 1. Deploy Ledgerise (Docker or VPS — link to Deployment section).
 2. Sign in with the default sandbox credentials.
 3. Connect your accounting system: go to Settings → Adapters → configure the Zoho Books (or journal-csv) outbound adapter.
-4. Sync your Chart of Accounts: Settings → COA Reference → Sync Now.
+4. Import your Chart of Accounts: Settings → COA Reference → Import COA.
 5. Enable an inbound adapter: configure the webhook, CSV, or poll adapter for your transaction source.
 6. Create your first mapping rule: Mapping Rules → Add Rule.
 7. Import a test transaction batch or wait for a webhook to arrive.
@@ -220,7 +220,7 @@ Note on secrets: AUTH_TOKEN_SECRET and LEDGERISE_CREDENTIALS_KEY are security-se
 - Default credentials: `admin@ledgerise.dev` / `password`.
 - What the Sandbox badge means: data you import here is demo data. It does not affect your accounting system.
 - Walk through the first login: open the dashboard URL, sign in, confirm the Sandbox badge is visible.
-- What to do in sandbox mode before going live: configure adapters, sync COA, set up mapping rules, import test transactions, and invite your team.
+- What to do in sandbox mode before going live: configure adapters, import COA, set up mapping rules, import test transactions, and invite your team.
 - How to reset sandbox data when you are ready for production (Settings → System → Reset sandbox data).
 
 `[SCREENSHOT: Ledgerise login screen with sandbox badge visible in the top chrome after sign-in]`
@@ -239,7 +239,7 @@ Pre-activation checklist:
 - Confirm environment variables are set for the real deployment.
 - Invite named admin and finance users. Do not go live with only the default admin account.
 - Configure all adapters with production credentials.
-- Sync your Chart of Accounts.
+- Import your Chart of Accounts.
 - Build out your mapping rules and test them against sample transactions.
 - Configure report sources and reconciliation rules for your counterparties.
 - Reset sandbox data: Settings → System → Reset sandbox data. This clears demo transactions, journals, reconciliation runs, and related operational records.
@@ -486,19 +486,15 @@ A Finance Officer following the quickstart will go live without having configure
 
 ---
 
-### discrepancy 3 — COA "imports" vs "syncs" in `key-concepts.md` (minor)
+### discrepancy 3 — COA "imports" vs "syncs" inconsistent across pages (minor)
 
-**File:** `01-getting-started/key-concepts.md`, line 31
+**File:** `01-getting-started/key-concepts.md`, line 33, plus `quickstart.md`, `sandbox-to-production.md`, `first-login.md`, `overview.md`
 
-**Problem:** The chart of accounts entry reads:
-
-> "Ledgerise does not own or manage your chart of accounts. It **imports** a read-only copy from your accounting system…"
-
-The UI action is **"Sync Now"** (Settings → COA Reference → Sync Now). All other written pages use "sync" or "Sync Now" consistently — `sandbox-to-production.md`, `first-login.md`, `overview.md`, `quickstart.md`. Using "imports" in `key-concepts.md` creates a mismatch: a reader who follows the instruction to "import" the COA will not find an "Import" button in the UI.
+**Problem:** `key-concepts.md` line 31 correctly says Ledgerise "**imports** a read-only copy" of the COA — this is the correct terminology, confirmed against source. But line 33 of the same entry says to "**sync** the updated list into Ledgerise," and every other written page (`quickstart.md` step 3, `sandbox-to-production.md`, `first-login.md`, `overview.md`) uses "sync" / "Sync Now" for the same action. This is backwards — the correct verb is **import**, not sync.
 
 **Required fix:**
 
-Change "It imports a read-only copy from your accounting system" to "It syncs a read-only copy from your accounting system".
+Standardize on "import" terminology everywhere. Change `key-concepts.md` line 33 to use "import" instead of "sync." Change the UI action references in `quickstart.md`, `sandbox-to-production.md`, `first-login.md`, and `overview.md` from "sync" / "Sync Now" to "import" / "Import COA."
 
 ---
 
@@ -538,7 +534,7 @@ Add one or two sentences at the top of the `reconciliation run` entry positionin
 |---|---|---|---|
 | 1 | Reconciliation omitted from architecture and diagram | `01-getting-started/how-ledgerise-works.md` | Critical |
 | 2 | Reconciliation setup step missing from quickstart flow | `01-getting-started/quickstart.md` | Critical |
-| 3 | COA: "imports" should be "syncs" | `01-getting-started/key-concepts.md` (line 31) | Minor |
+| 3 | COA: "sync" language should be "import" | `01-getting-started/key-concepts.md` (line 33) + cross-file | Minor |
 | 4 | Reconciliation framed as optional in go-live checklist | `02-deployment/sandbox-to-production.md` | Moderate |
 | 5 | Reconciliation terms defined without flow context | `01-getting-started/key-concepts.md` | Minor |
 
@@ -796,10 +792,10 @@ Priority order (highest to lowest):
 
 - Ledgerise does not own your Chart of Accounts. It is imported from your connected accounting system (Zoho Books, or QuickBooks when supported) and is read-only within Ledgerise.
 - Where to view it: Settings → COA Reference.
-- How to sync: Settings → COA Reference → Sync Now. This pulls the latest account list from your accounting system.
+- How to import: Settings → COA Reference → Import COA. This pulls the latest account list from your accounting system.
 - What the COA Reference page shows: account code, account name, account type (with color chip), and currency.
 - How to use the COA in mapping rules: the debit and credit account pickers in the Add/Edit Rule drawer are searchable. Type the account name or code to find the account. Click "Browse COA" to see the full list.
-- If an account is missing: add it in Zoho Books (or your accounting system) first, then sync again in Ledgerise.
+- If an account is missing: add it in Zoho Books (or your accounting system) first, then import again in Ledgerise.
 
 `[SCREENSHOT: Settings > COA Reference showing the account list with color-coded type chips (blue for Asset, green for Income, etc.)]`
 
@@ -879,7 +875,7 @@ Covers how to monitor and manage the double-entry journal entries generated by t
 - Common causes and fixes:
   - **AUTH_FAILED**: re-check and re-enter your accounting system credentials in Settings → Adapters.
   - **RATE_LIMITED**: the accounting system is rate limiting. Wait and retry. Automatic retry handles this in most cases.
-  - **Invalid account code**: the COA account referenced by the mapping rule no longer exists in your accounting system. Sync your COA and check the rule.
+  - **Invalid account code**: the COA account referenced by the mapping rule no longer exists in your accounting system. Import your COA and check the rule.
 
 `[SCREENSHOT: Journal Log filtered to "Failed" status showing the red failed badge and Retry action button]`
 
@@ -1121,7 +1117,7 @@ A practical walkthrough for building a new inbound adapter from scratch.
 - OAuth flow: how the authorization flow works and where to find your credentials.
 - How Ledgerise maps entries to Zoho: each Ledgerise journal entry becomes one Zoho Books manual journal record.
 - Rate limits: Zoho allows 100 API calls per minute. Ledgerise batches entries and handles rate limiting automatically.
-- COA mapping: Ledgerise account codes must match Zoho Books account names or codes. Sync your COA in Settings → COA Reference to keep them aligned.
+- COA mapping: Ledgerise account codes must match Zoho Books account names or codes. Import your COA in Settings → COA Reference to keep them aligned.
 - Troubleshooting common errors: AUTH_FAILED, rate limit errors, account code not found.
 
 `[SCREENSHOT: zoho-books adapter Configure panel showing Client ID, Client Secret, and Organization ID fields]`

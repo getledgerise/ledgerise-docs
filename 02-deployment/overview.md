@@ -66,7 +66,7 @@ There is also a `migrate` tool service (Docker only) that applies database migra
 
 ## fresh deployments start in sandbox mode
 
-A fresh deployment starts in **sandbox mode**. This is intentional and safe — sandbox mode means nothing you do can affect your accounting system or your production data. You use sandbox mode to configure adapters, sync your chart of accounts, build mapping rules, and import test transactions.
+A fresh deployment starts in **sandbox mode**. This is intentional and safe — sandbox mode means nothing you do can affect your accounting system or your production data. You use sandbox mode to configure adapters, import your chart of accounts, build mapping rules, and import test transactions.
 
 Once you are satisfied with your setup, you activate your commercial license in Settings → System. This switches the deployment to production and removes the Sandbox badge. Until you do that, no journal entries will ever be posted to your accounting system.
 
