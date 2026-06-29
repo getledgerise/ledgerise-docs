@@ -15,6 +15,7 @@
 1. [01-getting-started/](#01-getting-started)
 2. [02-deployment/](#02-deployment)
 3. [03-transactions/](#03-transactions)
+3b. [03b — discrepancy audit and correction plan](#03b--discrepancy-audit-and-correction-plan)
 4. [04-reconciliation/](#04-reconciliation)
 5. [05-mapping-rules/](#05-mapping-rules)
 6. [06-journal-log/](#06-journal-log)
@@ -408,6 +409,138 @@ Table showing the combinations that result in action vs. no action, with links t
 - How many unmapped transactions is normal: below 2% of daily volume after initial setup is the target. Higher rates indicate missing mapping rules.
 
 `[SCREENSHOT: Transactions page filtered to "Unmapped only" showing amber posting status badges and the "Assign Rule" action button]`
+
+---
+
+## 03b — discrepancy audit and correction plan
+
+**Status:** Required fixes. These corrections must be applied to the pages listed below before continuing with any new sections. All discrepancies were identified by auditing written pages against the primary source documents: `PRD-v1.0.md` and `IA.md` (v0.4, 08 Jun 2026).
+
+**Source of truth:**
+- `/Users/m/GitHub/ledgerise-cloud/docs/product-docs/PRD-v1.0.md`
+- `/Users/m/GitHub/ledgerise-cloud/docs/product-docs/IA.md`
+- `/Users/m/GitHub/ledgerise-cloud/docs/product-docs/RECON-MODULE-PRD.md`
+
+---
+
+### discrepancy 1 — reconciliation omitted from the architecture in `how-ledgerise-works.md` (critical)
+
+**File:** `01-getting-started/how-ledgerise-works.md`
+
+**Problem:** The page describes a "three-layer architecture" (inbound adapters → journal engine → outbound adapters) and omits reconciliation entirely from the data flow. The ASCII diagram shows only:
+
+```
+Source System → Inbound Adapters → Journal Engine → Accounting System
+```
+
+This contradicts the core loop stated in `introduction.md` and in both source documents:
+
+```
+Transactions in → Reconciliation → Classification → Journal entries out
+```
+
+The "three-layer" framing accurately describes the adapter pluggability pattern (how source systems and accounting systems are decoupled) but is not a complete description of the operational data flow. Reconciliation is a distinct module that sits between ingestion and classification — it is not one of the three adapter layers. A reader who reads `introduction.md` first (correctly sees four stages) and then reads `how-ledgerise-works.md` (sees three stages, no reconciliation) is left with an inconsistent mental model.
+
+**Required fixes:**
+
+1. Add a new section — **"the reconciliation stage"** — explaining that reconciliation sits between ingestion and classification. Transactions are stored first, then verified against external counterparty statements, then classified via mapping rules, then posted. Reconciliation is not a background job; it is triggered by the Finance Officer when an external statement arrives.
+
+2. Update the ASCII diagram to show all four operational stages. The updated diagram should show:
+   ```
+   Source System   ──►  Inbound Adapters  ──►  Reconciliation  ──►  Journal Engine  ──►  Accounting System
+                        (normalize data)        (verify vs              (map + post)
+                                                 external stmts)
+   ```
+
+3. Add a note that the **posting gate** is configurable: the default (`disabled`) means the engine posts from internal records without waiting for reconciliation. When enabled, the gate can require provider match, bank match, or full match before a transaction is eligible for posting. This explains why journal entries appear before reconciliation is set up — it is by design, not an oversight.
+
+4. Update the opening sentence from "before you start configuring adapters and mapping rules" to reference adapters, mapping rules, **and reconciliation**.
+
+5. Update the screenshot marker to describe an architecture diagram that includes the reconciliation stage.
+
+---
+
+### discrepancy 2 — reconciliation missing from the setup flow in `quickstart.md` (critical)
+
+**File:** `01-getting-started/quickstart.md`
+
+**Problem:** The quickstart has 9 steps, none of which include reconciliation setup. The current flow goes: adapters → mapping rules → import test data → run engine → invite team → go live. This contradicts IA Flow 1, which explicitly includes:
+
+> Step 5: Reconciliation → Import Statement → confirm match rate
+
+A Finance Officer following the quickstart will go live without having configured any report sources, reconciliation rules, or verified a single counterparty statement. The first encounter with reconciliation will be when a real statement arrives from a provider — at which point there is no configuration in place and no frame of reference from the setup experience.
+
+**Required fixes:**
+
+1. Add a new step — **"set up reconciliation"** — positioned between the current step 5 (mapping rules) and step 6 (import test batch). The step should:
+   - Direct the user to Reconciliation → Import Statement
+   - Walk through creating a report source for their primary payment provider
+   - Direct them to configure at least one Reference Matching rule in Reconciliation → Rules
+   - Recommend importing a sample provider statement to verify the match rate before go-live
+
+2. Add a note that the posting gate defaults to `disabled` — journal entries post from internal records without waiting for reconciliation. The reconciliation setup step can be completed after go-live, but report sources and at least one rule set should be in place before the first real statement arrives.
+
+3. Update the "before you begin" prerequisites section to include: a sample statement (CSV) from the primary payment provider, for verifying reconciliation setup.
+
+4. Update the "what to monitor after go-live" section to include: **Reconciliation → Breaks tab** — check for SLA-breached breaks after each statement import.
+
+---
+
+### discrepancy 3 — COA "imports" vs "syncs" in `key-concepts.md` (minor)
+
+**File:** `01-getting-started/key-concepts.md`, line 31
+
+**Problem:** The chart of accounts entry reads:
+
+> "Ledgerise does not own or manage your chart of accounts. It **imports** a read-only copy from your accounting system…"
+
+The UI action is **"Sync Now"** (Settings → COA Reference → Sync Now). All other written pages use "sync" or "Sync Now" consistently — `sandbox-to-production.md`, `first-login.md`, `overview.md`, `quickstart.md`. Using "imports" in `key-concepts.md` creates a mismatch: a reader who follows the instruction to "import" the COA will not find an "Import" button in the UI.
+
+**Required fix:**
+
+Change "It imports a read-only copy from your accounting system" to "It syncs a read-only copy from your accounting system".
+
+---
+
+### discrepancy 4 — sandbox-to-production frames reconciliation as optional (moderate)
+
+**File:** `02-deployment/sandbox-to-production.md`
+
+**Problem:** The reconciliation section is headed **"reconciliation (if applicable)"** and presents the two checklist items (report sources and reconciliation rules) as optional. This contradicts IA Flow 1, which lists reconciliation as a standard step in first-time setup. Framing it as optional will lead operators to skip it entirely, resulting in no reconciliation infrastructure when the first provider statement arrives post-launch.
+
+**Required fixes:**
+
+1. Remove "(if applicable)" from the section heading — change to "reconciliation".
+
+2. Add a clarifying note: "Reconciliation can be enabled incrementally after go-live. However, report sources and at least one rule set per counterparty should be in place before your first external statement arrives. The posting gate defaults to `disabled`, meaning journal entries post from internal records without waiting for reconciliation confirmation. Enable the gate in Settings → System when you are ready to require counterparty verification before posting."
+
+3. Keep the two checklist items but reclassify them from optional to **recommended**.
+
+---
+
+### discrepancy 5 — `key-concepts.md` defines reconciliation terms without placing them in the flow (minor)
+
+**File:** `01-getting-started/key-concepts.md`
+
+**Problem:** The `reconciliation run` definition correctly explains what a run is and how it is triggered, but never states where reconciliation sits in the operational sequence relative to transactions and journal posting. Without this context, reconciliation reads as an independent side activity rather than stage 2 of the core loop. A new reader cannot tell from the key-concepts page whether reconciliation happens before or after journal posting.
+
+**Required fix:**
+
+Add one or two sentences at the top of the `reconciliation run` entry positioning it in the core loop:
+
+> "In the Ledgerise core loop — Transactions in → Reconciliation → Classification → Journal entries out — reconciliation is the verification stage. It sits between ingestion and journal posting: internal transaction records are compared against external counterparty statements before mapping rules classify and post them."
+
+---
+
+### summary table — pages requiring correction before section 04 proceeds
+
+| # | Discrepancy | File | Severity |
+|---|---|---|---|
+| 1 | Reconciliation omitted from architecture and diagram | `01-getting-started/how-ledgerise-works.md` | Critical |
+| 2 | Reconciliation setup step missing from quickstart flow | `01-getting-started/quickstart.md` | Critical |
+| 3 | COA: "imports" should be "syncs" | `01-getting-started/key-concepts.md` (line 31) | Minor |
+| 4 | Reconciliation framed as optional in go-live checklist | `02-deployment/sandbox-to-production.md` | Moderate |
+| 5 | Reconciliation terms defined without flow context | `01-getting-started/key-concepts.md` | Minor |
 
 ---
 
