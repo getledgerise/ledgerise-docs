@@ -27,10 +27,10 @@ Ledgerise delivers license keys through a secure one-time retrieval flow:
 1. Ledgerise sends you an email with a **one-time retrieval link**. The link is valid for a limited time.
 2. Your **client ID** is sent to you separately — by phone, WhatsApp, or direct message — never in the same email as the link.
 3. Visit the retrieval link and enter your client ID.
-4. Copy the **license key** and the **license public key** displayed on the page.
+4. Copy the **license key** displayed on the page.
 5. The page expires after you copy the keys. It cannot be accessed again.
 
-Keep both keys somewhere safe before closing the retrieval page. If you lose them before entering them, contact Ledgerise — the existing keys will be revoked and new ones reissued.
+Keep the license key somewhere safe before closing the retrieval page. If you lose it before entering it, contact Ledgerise -- the existing key will be revoked and a new one reissued.
 
 > Treat the license key like a database password. Enter it only in Settings → System. Do not put it in code, config files, environment variable documentation, Slack messages, or emails.
 
@@ -41,7 +41,7 @@ Keep both keys somewhere safe before closing the retrieval page. If you lose the
 1. Go to **Settings → System**.
 2. Scroll to the **License** section.
 3. Enter your **commercial license key** in the first field.
-4. Enter the **license public key** in the second field.
+4. Click **Activate production**. Ledgerise verifies the key with Ledgerise Admin before production mode is enabled.
 5. Click **Activate License**.
 
 ![License key input fields](../images/license-key-input.png)
@@ -74,7 +74,7 @@ Look for:
 }
 ```
 
-If `environment_mode` still reads `"sandbox"`, the license was not applied. Double-check that you entered both keys exactly as they appeared on the retrieval page — no leading or trailing spaces.
+If `environment_mode` still reads `"sandbox"`, the license was not applied. Double-check that you entered the license key exactly as it appeared on the retrieval page — no leading or trailing spaces.
 
 ![Production license status](../images/system-production-license.png)
 

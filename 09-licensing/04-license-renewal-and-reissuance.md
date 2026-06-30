@@ -25,7 +25,7 @@ Contact Ledgerise before your license term ends. Renewal generates a new license
 Once you have the new key:
 
 1. Go to **Settings → System → License**.
-2. Enter the new license key and public key.
+2. Enter the new license key.
 3. Click **Activate License**.
 
 The renewed license takes effect at the next daily refresh. If your deployment was already in read-only mode due to expiry, ingestion and posting resume after the refresh.

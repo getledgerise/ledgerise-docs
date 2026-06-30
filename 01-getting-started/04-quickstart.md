@@ -13,7 +13,7 @@ This guide takes you from a fresh Ledgerise deployment to your first posted jour
 Make sure you have the following ready:
 
 - A running Ledgerise deployment. If you have not deployed yet, start with the [deployment overview](../02-deployment/01-overview.md).
-- Your Ledgerise commercial license key and public key, provided by Ledgerise via the key delivery flow.
+- Your Ledgerise commercial license key, provided by Ledgerise via the key delivery flow.
 - Credentials for your accounting system. For Zoho Books: your Client ID, Client Secret, and Organization ID.
 - Access to your accounting system to view your chart of accounts.
 - A list of your transaction product lines and billers — you will need these when creating mapping rules.
@@ -188,7 +188,7 @@ When you are satisfied that transactions are flowing in and journal entries are 
 
 1. **Configure your suspense account code** in Settings → System. This is the COA account where unmapped transactions will land.
 2. **Reset sandbox data** in Settings → System → Reset sandbox data. This clears all demo transactions, journal entries, reconciliation runs, and related records — leaving your adapter configuration, mapping rules, and users intact.
-3. **Activate your commercial license** in Settings → System. Enter your license key and public key. The Sandbox badge disappears and the status reads **Production License**.
+3. **Activate your commercial license** in Settings → System. Enter your license key. The Sandbox badge disappears and the status reads **Production License** after Ledgerise Admin approves the activation.
 4. **Verify the activation** by visiting `/healthcheck`. It should return `environment_mode: "production"`.
 5. Start your real data imports or live webhook connections.
 
