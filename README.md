@@ -1,4 +1,4 @@
-# Ledgerise documentation
+# Ledgerise Documentation
 
 Ledgerise is customer-managed payment operations infrastructure that automatically translates completed transactions into double-entry journal entries in your accounting system. You run it on your own servers — Ledgerise does not host your data.
 
