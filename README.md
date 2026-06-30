@@ -6,52 +6,6 @@ This documentation covers everything needed to deploy, configure, and operate Le
 
 ---
 
-## quick links
-
-### I'm a Finance Officer
-
-| Task | Go to |
-|---|---|
-| Create or update a mapping rule | [Creating a rule](05-mapping-rules/02-creating-a-rule.md) |
-| Import the chart of accounts | [Chart of accounts](05-mapping-rules/04-chart-of-accounts.md) |
-| Import a bank or provider statement | [Importing a statement](04-reconciliation/02-importing-a-statement.md) |
-| Review and resolve reconciliation breaks | [Resolving breaks](04-reconciliation/04-resolving-breaks.md) |
-| Retry failed journal entries | [Retrying failed entries](06-journal-log/03-retrying-failed-entries.md) |
-| Export journal data to a file | [Exporting journal data](06-journal-log/04-exporting-journal-data.md) |
-
-### I'm an Admin
-
-| Task | Go to |
-|---|---|
-| Deploy Ledgerise for the first time | [Docker deployment](02-deployment/02-docker-deployment.md) |
-| Complete the go-live checklist | [Sandbox to production](02-deployment/05-sandbox-to-production.md) |
-| Activate a commercial license | [Activating your license](09-licensing/03-activating-your-license.md) |
-| Configure an adapter | [Adapters](07-settings/01-adapters.md) |
-| Invite users and assign roles | [Users and roles](07-settings/02-users-and-roles.md) |
-| Review the system audit log | [Audit log](07-settings/04-audit-log.md) |
-| Upgrade to a new version | [Upgrading](02-deployment/06-upgrading.md) |
-
-### I'm a Developer
-
-| Task | Go to |
-|---|---|
-| Understand the adapter contract | [Adapter spec](08-adapters/02-adapter-spec.md) |
-| Build a custom inbound adapter | [Building an adapter](08-adapters/03-building-an-adapter.md) |
-| Look up the canonical transaction schema | [Transaction schema](12-reference/01-transaction-schema.md) |
-| Look up transaction types | [Transaction types](12-reference/02-transaction-types.md) |
-| Look up adapter error codes | [Error codes](12-reference/03-error-codes.md) |
-
-### I'm an Auditor
-
-| Task | Go to |
-|---|---|
-| View system and user activity | [Audit log](07-settings/04-audit-log.md) |
-| Review journal entries | [Journal entries](06-journal-log/02-journal-entries.md) |
-| Export journal data | [Exporting journal data](06-journal-log/04-exporting-journal-data.md) |
-| Understand reconciliation evidence | [Evidence packages](04-reconciliation/07-evidence-packages.md) |
-
----
-
 ## table of contents
 
 ### 01 — getting started
@@ -136,3 +90,49 @@ This documentation covers everything needed to deploy, configure, and operate Le
 - [Transaction types](12-reference/02-transaction-types.md)
 - [Error codes](12-reference/03-error-codes.md)
 - [Glossary](12-reference/04-glossary.md)
+
+---
+
+## quick links
+
+### I'm a Finance Officer
+
+| Task | Go to |
+|---|---|
+| Create or update a mapping rule | [Creating a rule](05-mapping-rules/02-creating-a-rule.md) |
+| Import the chart of accounts | [Chart of accounts](05-mapping-rules/04-chart-of-accounts.md) |
+| Import a bank or provider statement | [Importing a statement](04-reconciliation/02-importing-a-statement.md) |
+| Review and resolve reconciliation breaks | [Resolving breaks](04-reconciliation/04-resolving-breaks.md) |
+| Retry failed journal entries | [Retrying failed entries](06-journal-log/03-retrying-failed-entries.md) |
+| Export journal data to a file | [Exporting journal data](06-journal-log/04-exporting-journal-data.md) |
+
+### I'm an Admin
+
+| Task | Go to |
+|---|---|
+| Deploy Ledgerise for the first time | [Docker deployment](02-deployment/02-docker-deployment.md) |
+| Complete the go-live checklist | [Sandbox to production](02-deployment/05-sandbox-to-production.md) |
+| Activate a commercial license | [Activating your license](09-licensing/03-activating-your-license.md) |
+| Configure an adapter | [Adapters](07-settings/01-adapters.md) |
+| Invite users and assign roles | [Users and roles](07-settings/02-users-and-roles.md) |
+| Review the system audit log | [Audit log](07-settings/04-audit-log.md) |
+| Upgrade to a new version | [Upgrading](02-deployment/06-upgrading.md) |
+
+### I'm a Developer
+
+| Task | Go to |
+|---|---|
+| Understand the adapter contract | [Adapter spec](08-adapters/02-adapter-spec.md) |
+| Build a custom inbound adapter | [Building an adapter](08-adapters/03-building-an-adapter.md) |
+| Look up the canonical transaction schema | [Transaction schema](12-reference/01-transaction-schema.md) |
+| Look up transaction types | [Transaction types](12-reference/02-transaction-types.md) |
+| Look up adapter error codes | [Error codes](12-reference/03-error-codes.md) |
+
+### I'm an Auditor
+
+| Task | Go to |
+|---|---|
+| View system and user activity | [Audit log](07-settings/04-audit-log.md) |
+| Review journal entries | [Journal entries](06-journal-log/02-journal-entries.md) |
+| Export journal data | [Exporting journal data](06-journal-log/04-exporting-journal-data.md) |
+| Understand reconciliation evidence | [Evidence packages](04-reconciliation/07-evidence-packages.md) |
