@@ -76,7 +76,7 @@ x-ledgerise-env: &ledgerise-env
   NODE_ENV: production
 
 x-ledgerise-app: &ledgerise-app
-  image: ghcr.io/getledgerise/ledgerise-cloud:${LEDGERISE_IMAGE_TAG:-0.1.0}
+  image: ghcr.io/getledgerise/ledgerise:${LEDGERISE_IMAGE_TAG:-0.1.0}
   env_file:
     - .env
   environment:
