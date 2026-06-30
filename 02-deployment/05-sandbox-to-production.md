@@ -19,8 +19,8 @@ Take the time to work through this checklist in sandbox mode. It is designed to 
 - [ ] `DATABASE_URL` points to your production PostgreSQL database, not a local or demo instance.
 - [ ] `AUTH_TOKEN_SECRET` is a strong, unique random value — not a placeholder.
 - [ ] `LEDGERISE_CREDENTIALS_KEY` is a 64-character hex value — not a placeholder.
-- [ ] `PUBLIC_API_BASE_URL` matches the actual public URL of your API.
-- [ ] The API is served behind TLS (HTTPS). Do not go live on unencrypted HTTP.
+- [ ] `LEDGERISE_DOMAIN` matches the public hostname where users open Ledgerise.
+- [ ] The Ledgerise hostname is served behind TLS (HTTPS). Do not go live on unencrypted HTTP.
 - [ ] The health check endpoint (`/healthcheck`) returns `"repository":"postgres"` and `"db":"ok"`.
 
 ### user accounts
@@ -108,7 +108,7 @@ After activation:
 Before starting real data imports, verify the activation:
 
 ```bash
-curl http://localhost:3000/healthcheck
+curl https://ledgerise.your-domain.com/healthcheck
 ```
 
 Look for `"environment_mode": "production"` in the response. If you still see `"environment_mode": "sandbox"`, the license was not applied correctly. Check that the license key matches exactly what Ledgerise provided and that the deployment can reach Ledgerise for activation.

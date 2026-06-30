@@ -9,7 +9,7 @@ The webhook adapter receives transaction data pushed by your source system to a 
 ## how it works
 
 1. You configure the webhook adapter with a shared signing secret and a field mapping.
-2. Ledgerise provides you with a webhook endpoint URL — for example, `https://api.your-domain.com/webhooks/inbound`.
+2. Ledgerise provides you with a webhook endpoint URL — for example, `https://ledgerise.your-domain.com/webhooks/inbound`.
 3. You configure your source system (payment engine, payment provider) to send POST requests to that URL whenever a transaction completes.
 4. Each incoming payload is validated against the signing secret. Invalid signatures are rejected immediately with a `401` response.
 5. Valid payloads are normalised into the canonical transaction schema and stored. The transaction appears on the Transactions page within seconds.
@@ -85,7 +85,7 @@ SECRET="your-signing-secret"
 PAYLOAD='{"tx_ref":"TEST-001","tx_amount":100000,"tx_currency":"NGN","product":"bill-payment","tx_status":"completed","event_time":"2024-01-15T10:00:00Z"}'
 SIGNATURE=$(echo -n "$PAYLOAD" | openssl dgst -sha256 -hmac "$SECRET" | awk '{print $2}')
 
-curl -X POST https://api.your-domain.com/webhooks/inbound \
+curl -X POST https://ledgerise.your-domain.com/webhooks/inbound \
   -H "Content-Type: application/json" \
   -H "X-Ledgerise-Signature: $SIGNATURE" \
   -d "$PAYLOAD"

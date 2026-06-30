@@ -73,7 +73,7 @@ DATABASE_URL=postgres://ledgerise:password@your-db-host/ledgerise_restore \
 **2. Confirm the healthcheck passes.**
 
 ```bash
-curl http://localhost:3000/healthcheck
+curl https://ledgerise.your-domain.com/healthcheck
 ```
 
 Expect: `"repository": "postgres"` and `"db": "ok"`. If the healthcheck fails, check the API logs for a database connection error — the most common cause is a `DATABASE_URL` pointing to the wrong host or using the wrong credentials.

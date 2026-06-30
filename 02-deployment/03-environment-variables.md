@@ -19,7 +19,7 @@ These four variables must be set before the application can start. Missing any o
 | `DATABASE_URL` | PostgreSQL connection string. Format: `postgresql://user:password@host:5432/dbname`. The API and worker both connect to this database. |
 | `AUTH_TOKEN_SECRET` | Secret used to sign and verify dashboard session tokens. Must be a strong random value. Generate one with `openssl rand -hex 64`. Rotate this value to invalidate all active sessions. |
 | `LEDGERISE_CREDENTIALS_KEY` | AES-256-GCM encryption key for adapter credentials (API keys, OAuth tokens) and AI provider keys stored in the database. Must be a 64-character hex string. Generate one with `openssl rand -hex 32`. **This value cannot be changed after credentials have been stored without re-encrypting the existing data.** |
-| `PUBLIC_API_BASE_URL` | The public URL of the Ledgerise API, as it is reachable from a user's browser — for example, `https://api.your-domain.com`. The Docker web service serves this value at runtime through `/runtime-config.js`, so changing API domains does not require a rebuilt image. |
+| `LEDGERISE_DOMAIN` | Hostname where users open Ledgerise, without `https://` and without a path — for example, `ledgerise.your-domain.com`. The Docker web service uses this to serve browser runtime config through `/runtime-config.js`. |
 
 > **Treat `AUTH_TOKEN_SECRET` and `LEDGERISE_CREDENTIALS_KEY` as secrets.** Do not commit them to version control. Do not log them. Use a secrets manager or a `.env` file with restricted permissions (`chmod 600 .env`).
 
@@ -32,8 +32,7 @@ These variables tune how the services behave at runtime. Defaults are safe for m
 | Variable | Default | Description |
 |---|---|---|
 | `LEDGERISE_IMAGE_TAG` | `0.1.0` | Docker image version used by `docker-compose.yml`, for example `0.1.0`. Change this when upgrading to a new Ledgerise release. |
-| `API_PORT` | `3000` | Host port the API service listens on. |
-| `WEB_PORT` | `3001` | Host port the web dashboard service listens on. |
+| `LEDGERISE_PROXY_PORT` | `18080` | Local host port exposed by the bundled Ledgerise Caddy proxy. Point your existing server proxy to `http://127.0.0.1:18080`. |
 | `RUN_ENGINE_ON_START` | `false` | If `true`, the worker runs one journal engine cycle immediately when it starts, before falling into its scheduled loop. Useful for local development. |
 | `RUN_GENERIC_POLL_ON_START` | `false` | If `true`, the worker triggers one poll adapter cycle on startup. |
 | `RUN_GENERIC_POLL_SCHEDULE` | `false` | If `true`, the worker keeps a recurring poll scheduler running. Set this if you are using the poll inbound adapter. |

@@ -12,7 +12,8 @@ Before deploying, have the following ready:
 - A **PostgreSQL database** — this is where all Ledgerise data is stored. Ledgerise does not provide or manage this database.
 - Your **Ledgerise commercial license key**, provided during onboarding.
 - Credentials for your accounting system (for example, Zoho Books Client ID and Client Secret).
-- A domain name or internal hostname for the Ledgerise dashboard and API, so you can set `PUBLIC_API_BASE_URL` correctly.
+- A domain name or internal hostname where users will open Ledgerise, for example `ledgerise.your-domain.com`.
+- A server proxy or hosting panel route that forwards that hostname to the local Ledgerise proxy port.
 
 ---
 
@@ -28,15 +29,16 @@ The image includes the services and operational tools needed to run Ledgerise. Y
 
 ## service architecture
 
-The Ledgerise deployment runs three services:
+The Ledgerise deployment runs four services:
 
 | Service | Purpose | Default port |
 |---|---|---|
+| `caddy` | Bundled local proxy that routes dashboard and API traffic inside Docker | `18080` on localhost |
 | `api` | HTTP API, dashboard auth, health endpoint, adapters, posting | `3000` |
 | `web` | Built React dashboard served by a static web server | `3001` |
 | `worker` | Background runner for poll and journal engine jobs | — |
 
-The three services share a single PostgreSQL database. They are stateless — the database is the source of truth for everything. This means you can restart any service at any time without data loss.
+The application services share a single PostgreSQL database. They are stateless — the database is the source of truth for everything. This means you can restart any service at any time without data loss.
 
 There is also a `migrate` tool service (Docker only) that applies database migrations. Migrations must run before the application starts, and again on every upgrade.
 

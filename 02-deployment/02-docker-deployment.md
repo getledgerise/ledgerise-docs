@@ -2,7 +2,46 @@
 
 This is the primary commercial deployment path. Ledgerise publishes a versioned Docker image. You run it with Docker Compose on your own server.
 
-**Who this is for:** Admins performing a fresh installation.
+**Who this is for:** Admins performing a fresh installation on a VPS or server that may already host other applications.
+
+---
+
+## how the docker install is exposed
+
+Ledgerise uses one public hostname:
+
+```text
+https://ledgerise.your-domain.com
+```
+
+Inside Docker, Ledgerise runs four services:
+
+- `caddy` — bundled local proxy for Ledgerise
+- `api` — Ledgerise API and backend
+- `web` — Ledgerise dashboard
+- `worker` — background jobs
+
+Only the bundled `caddy` service is exposed to the host, and only on localhost:
+
+```text
+127.0.0.1:18080
+```
+
+Your existing server proxy, hosting panel, nginx, Caddy, or Traefik should forward the Ledgerise hostname to that local port:
+
+```text
+https://ledgerise.your-domain.com -> http://127.0.0.1:18080
+```
+
+Then Ledgerise's bundled Caddy routes internally:
+
+```text
+/api/*       -> api container
+/healthcheck -> api container
+everything else -> dashboard
+```
+
+If your DNS already has a wildcard record, such as `*.your-domain.com -> VPS_PUBLIC_IP`, you may not need a new DNS record. You still need the server proxy route for the Ledgerise hostname.
 
 ---
 
@@ -10,11 +49,11 @@ This is the primary commercial deployment path. Ledgerise publishes a versioned 
 
 Before you begin, make sure you have:
 
-- **Docker** and **Docker Compose** installed on the server.
-- A **PostgreSQL 14+** database accessible from the server. This can be a managed database (AWS RDS, Supabase, etc.) or a self-managed instance.
-- Your **Ledgerise commercial license key**, provided during onboarding.
-- Your domain name or IP address, so you can set `PUBLIC_API_BASE_URL`.
-- The four required environment variable values listed in step 2.
+- Docker and Docker Compose installed on the server.
+- A PostgreSQL 14+ database accessible from the server.
+- Your Ledgerise commercial license key, provided during onboarding.
+- A hostname where users will open Ledgerise, for example `ledgerise.your-domain.com`.
+- A server proxy or hosting panel that can forward that hostname to `127.0.0.1:18080`.
 
 ---
 
@@ -35,7 +74,6 @@ name: ledgerise-cloud
 
 x-ledgerise-env: &ledgerise-env
   NODE_ENV: production
-  API_PORT: 3000
 
 x-ledgerise-app: &ledgerise-app
   image: ghcr.io/getledgerise/ledgerise-cloud:${LEDGERISE_IMAGE_TAG:-0.1.0}
@@ -46,11 +84,22 @@ x-ledgerise-app: &ledgerise-app
   restart: unless-stopped
 
 services:
+  caddy:
+    image: caddy:2-alpine
+    ports:
+      - "127.0.0.1:${LEDGERISE_PROXY_PORT:-18080}:80"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+    restart: unless-stopped
+    depends_on:
+      api:
+        condition: service_healthy
+      web:
+        condition: service_started
+
   api:
     <<: *ledgerise-app
     command: npm start -w apps/api
-    ports:
-      - "${API_PORT:-3000}:3000"
     healthcheck:
       test: ["CMD-SHELL", "node -e \"fetch('http://127.0.0.1:3000/healthcheck').then((r) => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))\""]
       interval: 30s
@@ -61,8 +110,6 @@ services:
   web:
     <<: *ledgerise-app
     command: node scripts/serve-web.mjs
-    ports:
-      - "${WEB_PORT:-3001}:3001"
     depends_on:
       api:
         condition: service_healthy
@@ -85,6 +132,26 @@ services:
     restart: "no"
 ```
 
+Create `Caddyfile` in the same folder:
+
+```caddyfile
+:80 {
+  encode zstd gzip
+
+  handle /api/* {
+    reverse_proxy api:3000
+  }
+
+  handle /healthcheck {
+    reverse_proxy api:3000
+  }
+
+  handle {
+    reverse_proxy web:3001
+  }
+}
+```
+
 The image is public, so `docker login` is not required. Production use still requires a valid license key in Settings → System after first login.
 
 ---
@@ -96,13 +163,13 @@ Create `.env` in `/opt/ledgerise` and fill in your values:
 ```env
 LEDGERISE_IMAGE_TAG=0.1.0
 
+LEDGERISE_DOMAIN=ledgerise.your-domain.com
+LEDGERISE_PROXY_PORT=18080
+
 DATABASE_URL=postgresql://ledgerise:change-me@your-db-host:5432/ledgerise
 AUTH_TOKEN_SECRET=replace-with-openssl-rand-hex-64
 LEDGERISE_CREDENTIALS_KEY=replace-with-openssl-rand-hex-32
-PUBLIC_API_BASE_URL=https://api.your-domain.com
 
-API_PORT=3000
-WEB_PORT=3001
 RUN_RECONCILIATION_QUEUE_WORKER=true
 ```
 
@@ -113,9 +180,9 @@ Four variables are required before the application can start:
 | `DATABASE_URL` | Your PostgreSQL connection string, e.g. `postgresql://ledgerise:password@host:5432/ledgerise` |
 | `AUTH_TOKEN_SECRET` | A strong random secret for signing session tokens. Generate one: `openssl rand -hex 64` |
 | `LEDGERISE_CREDENTIALS_KEY` | A 64-character hex key for encrypting adapter credentials. Generate one: `openssl rand -hex 32` |
-| `PUBLIC_API_BASE_URL` | The public URL of your API, e.g. `https://api.your-domain.com` |
+| `LEDGERISE_DOMAIN` | Hostname only, without `https://` and without a path, e.g. `ledgerise.your-domain.com` |
 
-> **On `PUBLIC_API_BASE_URL`:** The Docker web service serves this value to browsers at runtime through `/runtime-config.js`. You can change the API URL by updating `.env` and restarting the `web` service; you do not need a rebuilt image just to change domains.
+`LEDGERISE_PROXY_PORT` defaults to `18080`. Change it only if another local service already uses that port.
 
 → Full reference: [environment variables](03-environment-variables.md)
 
@@ -151,31 +218,60 @@ This applies all pending SQL migrations to your database and records them in `sc
 ## step 4 — start the services
 
 ```bash
-docker compose up -d api web worker
+docker compose up -d caddy api web worker
 ```
 
-This starts three services in the background:
-
-- `api` — the HTTP API and dashboard backend
-- `web` — the static React dashboard
-- `worker` — the background runner for the journal engine and poll adapters
-
-Check that all three are running:
+Check that all four services are running:
 
 ```bash
 docker compose ps
 ```
 
-All three should show `Up` in the status column.
+All four should show `Up` in the status column.
 
 ![Docker Compose services running](../images/docker-compose-ps.png)
 
 ---
 
-## step 5 — verify the health check
+## step 5 — connect your server proxy
+
+Configure your existing server proxy or hosting panel so the Ledgerise hostname forwards to the local Ledgerise proxy port:
+
+```text
+https://ledgerise.your-domain.com -> http://127.0.0.1:18080
+```
+
+If you use nginx directly, the proxy block looks like this:
+
+```nginx
+server {
+    server_name ledgerise.your-domain.com;
+
+    location / {
+        proxy_pass http://127.0.0.1:18080;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+}
+```
+
+Use your hosting panel, nginx, Caddy, Traefik, or Certbot flow to enable HTTPS for the hostname.
+
+---
+
+## step 6 — verify the health check
+
+First verify the local Ledgerise proxy:
 
 ```bash
-curl http://localhost:3000/healthcheck
+curl http://127.0.0.1:18080/healthcheck
+```
+
+Then verify the public hostname:
+
+```bash
+curl https://ledgerise.your-domain.com/healthcheck
 ```
 
 A healthy response looks like this:
@@ -190,13 +286,27 @@ A healthy response looks like this:
 
 If `repository` shows `"memory"` instead of `"postgres"`, the API is not reading your `DATABASE_URL`. See the troubleshooting section below.
 
-Open the dashboard URL in your browser (`http://your-server:3001` or your configured domain). You should see the Ledgerise login screen.
+Check the browser runtime config:
 
-![Healthcheck response](../images/healthcheck-response.png)
+```bash
+curl https://ledgerise.your-domain.com/runtime-config.js
+```
+
+It should contain your Ledgerise domain:
+
+```js
+window.__LEDGERISE_CONFIG__ = {"apiBaseUrl":"https://ledgerise.your-domain.com"};
+```
 
 ---
 
-## step 6 — sign in
+## step 7 — sign in
+
+Open the dashboard URL in your browser:
+
+```text
+https://ledgerise.your-domain.com
+```
 
 Sign in with the default sandbox credentials:
 
@@ -215,25 +325,35 @@ After first login, activate your license from Settings → System using your Led
 
 ### dashboard shows "failed to fetch"
 
-The web service may not be receiving the correct `PUBLIC_API_BASE_URL`, or your reverse proxy may be serving an old static dashboard instead of the Docker `web` service.
-
 Check the runtime config your browser receives:
 
 ```bash
-curl https://your-dashboard-domain/runtime-config.js
+curl https://ledgerise.your-domain.com/runtime-config.js
 ```
 
-The response should contain your public API URL:
+The response should contain your Ledgerise domain:
 
 ```js
-window.__LEDGERISE_CONFIG__ = {"apiBaseUrl":"https://api.your-domain.com"};
+window.__LEDGERISE_CONFIG__ = {"apiBaseUrl":"https://ledgerise.your-domain.com"};
 ```
 
-If it is wrong, update `PUBLIC_API_BASE_URL` in `.env` and restart the web service:
+If it is wrong, update `LEDGERISE_DOMAIN` in `.env` and restart the web service:
 
 ```bash
 docker compose restart web
 ```
+
+If it is correct, check that your server proxy forwards `https://ledgerise.your-domain.com` to `http://127.0.0.1:18080`.
+
+### public hostname does not load
+
+Check the local Ledgerise proxy:
+
+```bash
+curl http://127.0.0.1:18080/healthcheck
+```
+
+If the local check works but the public hostname fails, the problem is in DNS, HTTPS, or the existing server proxy configuration.
 
 ### api shows `"repository":"memory"` in healthcheck
 

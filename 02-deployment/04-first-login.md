@@ -8,10 +8,10 @@ Once your Ledgerise deployment is running, sign in and confirm everything is wor
 
 Navigate to your Ledgerise dashboard URL in a browser. If you deployed locally or have not yet set up a domain, try:
 
-- Dashboard: `http://your-server:3001`
-- API health check: `http://your-server:3000/healthcheck`
+- Local Ledgerise proxy: `http://127.0.0.1:18080`
+- Local health check: `http://127.0.0.1:18080/healthcheck`
 
-If you deployed behind a reverse proxy or nginx, use your configured domain name instead.
+If you deployed behind a reverse proxy or hosting panel, use your configured Ledgerise hostname, for example `https://ledgerise.your-domain.com`.
 
 ---
 
@@ -82,6 +82,6 @@ docker compose --profile tools run --rm migrate
 docker compose restart api
 ```
 
-**The dashboard loads but shows "failed to fetch":** The web service may not be serving the correct `PUBLIC_API_BASE_URL`, or nginx may be routing the dashboard/API domains incorrectly. Check `/runtime-config.js` on the dashboard domain and confirm it contains the public API URL your browser should call.
+**The dashboard loads but shows "failed to fetch":** The web service may not be serving the correct `LEDGERISE_DOMAIN`, or your server proxy may not be forwarding the Ledgerise hostname to `127.0.0.1:18080`. Check `/runtime-config.js` on the dashboard domain and confirm it contains your Ledgerise hostname.
 
 → More troubleshooting: [docker deployment](02-docker-deployment.md#troubleshooting)

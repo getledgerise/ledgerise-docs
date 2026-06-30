@@ -32,7 +32,7 @@ docker compose pull
 docker compose --profile tools run --rm migrate
 
 # 3. Restart all services
-docker compose up -d api web worker
+docker compose up -d caddy api web worker
 ```
 
 Run the migration step before restarting — never the other way around. Starting the new API version before migrations are applied can cause the application to fail to start or behave incorrectly.
@@ -41,10 +41,10 @@ Verify the upgrade:
 
 ```bash
 docker compose ps
-curl http://localhost:3000/healthcheck
+curl https://ledgerise.your-domain.com/healthcheck
 ```
 
-All three services should be `Up` and the health check should return `"db":"ok"`.
+All four services should be `Up` and the health check should return `"db":"ok"`.
 
 ---
 
@@ -78,10 +78,10 @@ Common causes: a new required environment variable that is not yet set in `.env`
 Check the dashboard runtime config before assuming the image is wrong:
 
 ```bash
-curl https://your-dashboard-domain/runtime-config.js
+curl https://ledgerise.your-domain.com/runtime-config.js
 ```
 
-It should contain the public API URL. If it does not, update `PUBLIC_API_BASE_URL` in `.env` and restart the `web` service:
+It should contain the Ledgerise domain. If it does not, update `LEDGERISE_DOMAIN` in `.env` and restart the `web` service:
 
 ```bash
 docker compose restart web
