@@ -85,8 +85,6 @@ services:
     restart: "no"
 ```
 
-> The image includes the compiled API, web dashboard, worker, migrations, and operational scripts. It does not include TypeScript source files.
-
 The image is public, so `docker login` is not required. Production use still requires a valid license key in Settings → System after first login.
 
 ---
