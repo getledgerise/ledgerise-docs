@@ -40,37 +40,6 @@ All three services should be `Up` and the health check should return `"db":"ok"`
 
 ---
 
-## upgrading a vps deployment
-
-```bash
-cd /opt/ledgerise
-
-# 1. Pull the latest source
-git pull origin main
-
-# 2. Install any new dependencies
-sudo -u www-data npm install
-
-# 3. Rebuild the web dashboard
-sudo -u www-data VITE_API_BASE_URL=https://api.your-domain.com npm run build
-
-# 4. Run migrations
-sudo -u www-data node --env-file=/opt/ledgerise/.env scripts/run-migrations.mjs
-
-# 5. Copy the new web build to the nginx web root
-sudo cp -r /opt/ledgerise/apps/web/dist /var/www/ledgerise
-
-# 6. Restart the services
-sudo systemctl restart ledgerise-api ledgerise-worker
-
-# 7. Reload nginx
-sudo nginx -t && sudo systemctl reload nginx
-```
-
-Replace `https://api.your-domain.com` with your actual API URL when rebuilding.
-
----
-
 ## after upgrading
 
 - Check the dashboard loads correctly.
@@ -91,15 +60,11 @@ Stop the services and restore your database backup before attempting again. Do n
 Check the API logs for the error:
 
 ```bash
-# Docker
 docker compose logs api
-
-# VPS
-sudo journalctl -u ledgerise-api -n 100
 ```
 
 Common causes: a new required environment variable that is not yet set in `.env`, or a migration that did not complete.
 
 ### dashboard shows blank page or "failed to fetch"
 
-The web build may need to be rebuilt. This happens if a new release changes the frontend bundle in a way that requires a rebuild with the current `VITE_API_BASE_URL`. Rebuild and re-copy the web assets (VPS), or contact Ledgerise for a rebuilt image (Docker).
+The web build may need to be rebuilt. Contact Ledgerise for a rebuilt image if a new release changes the frontend bundle.

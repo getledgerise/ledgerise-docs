@@ -66,13 +66,8 @@ Once the restore completes, verify the data before pointing any live traffic at 
 Update `DATABASE_URL` in your environment to point to the restored database, then start the API:
 
 ```bash
-# Docker
 DATABASE_URL=postgres://ledgerise:password@your-db-host/ledgerise_restore \
   docker compose up api
-
-# VPS
-sudo systemctl edit ledgerise-api  # update DATABASE_URL
-sudo systemctl restart ledgerise-api
 ```
 
 **2. Confirm the healthcheck passes.**

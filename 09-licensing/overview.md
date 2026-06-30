@@ -1,18 +1,22 @@
 # licensing overview
 
-Ledgerise is dual-licensed. Understanding which license applies to your deployment, and what the commercial license gives you, is the starting point for procurement and go-live planning.
+Ledgerise is available as a **free online demo** for evaluation and as a **commercial on-premise license** for production deployments. Understanding which applies to your situation is the starting point for procurement and go-live planning.
 
 ---
 
-## the two licenses
+## free online demo
 
-**Apache 2.0 (open source)**
+The Ledgerise demo lets you explore the platform without setting up any infrastructure. Import sample transactions, configure mapping rules, and see how the reconciliation and journal engine work — all in a hosted demo environment maintained by Ledgerise.
 
-The Ledgerise source code is available under the Apache 2.0 license. You can self-host, modify, and distribute it at no cost under those terms. The Apache 2.0 build does not include the private Docker image, the versioned release channel, or implementation support.
+The demo is intended for evaluation. It is not a production deployment: data does not persist between sessions, live adapter connections to payment systems are not supported, and journal entries are not posted to any accounting system.
 
-**Commercial on-premise license**
+Contact Ledgerise to access the demo environment.
 
-The commercial license is required to run Ledgerise in a production environment under a supported configuration. It gives you:
+---
+
+## commercial on-premise license
+
+The commercial license is required to run Ledgerise in a production environment. It gives you:
 
 - A versioned Docker image pulled from the Ledgerise private registry — no build toolchain, no source code required.
 - A supported version window with changelog and migration notes for each release.

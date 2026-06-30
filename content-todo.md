@@ -109,7 +109,7 @@ Terms to cover:
 A task-oriented guide that takes the reader from a fresh deployment to their first posted journal entry. Steps are numbered and sequential. Each step references the full guide for details.
 
 Steps:
-1. Deploy Ledgerise (Docker or VPS — link to Deployment section).
+1. Deploy Ledgerise with Docker — link to Deployment section.
 2. Sign in with the default sandbox credentials.
 3. Connect your accounting system: go to Settings → Adapters → configure the Zoho Books (or journal-csv) outbound adapter.
 4. Import your Chart of Accounts: Settings → COA Reference → Import COA.
@@ -138,11 +138,11 @@ For the Admin or DevOps person responsible for installing and running Ledgerise.
 **Content outline:**
 
 - Ledgerise is customer-managed: you run it in your own infrastructure. Ledgerise does not host your transaction data.
-- Two supported paths: Docker deployment (the primary commercial path) and VPS source deployment (for internal demos or development).
+- One supported deployment path: Docker. You receive a versioned Docker image from the Ledgerise private registry and run it with Docker Compose.
 - What the system needs: a server, a PostgreSQL database, a license key, and your credentials for adapters and your accounting system.
 - What Ledgerise provides: a versioned Docker image, this documentation, and implementation support for commercial customers.
 - Brief architecture: three services (api, web, worker) + your database.
-- Link forward to docker-deployment.md and vps-deployment.md.
+- Link forward to docker-deployment.md.
 
 `[SCREENSHOT: docker compose ps output showing api, web, and worker services all running]`
 
@@ -168,26 +168,6 @@ For the Admin or DevOps person responsible for installing and running Ledgerise.
 `[SCREENSHOT: Browser showing the /healthcheck response with repository: postgres and db: ok]`
 
 ---
-
-### `02-deployment/vps-deployment.md`
-
-**Audience:** Admins deploying from source (internal demos, development).
-
-**Content outline:**
-
-Note at the top: this path is for source-based deployments only. Commercial customers use Docker.
-
-- Install Node.js 20, PostgreSQL, and nginx.
-- Create the database and database user.
-- Clone the repository and build.
-- Configure the `.env` file.
-- Run migrations.
-- Set up systemd service files for the API and worker.
-- Configure nginx to serve the web frontend and proxy API requests.
-- Add TLS with Certbot.
-- Verify the deployment.
-
-`[SCREENSHOT: nginx configuration file with the proxy pass rules highlighted]`
 
 ---
 
@@ -267,7 +247,6 @@ Post-activation:
 
 - Ledgerise publishes versioned image releases. You will be notified by email with a changelog and migration notes.
 - How to upgrade (Docker): pull the new image, run migrations, restart services.
-- How to upgrade (VPS): pull the latest source, install dependencies, build, run migrations, restart services.
 - Database migrations are always additive in minor and patch releases — no columns or tables are dropped. Upgrades are safe to run without a maintenance window.
 - Version support window: 12 months per major version. After the window closes, upgrade to continue receiving security patches.
 - If something goes wrong: restore your last database backup and roll back the image to the previous version tag.
@@ -1151,7 +1130,7 @@ For Admins and commercial clients understanding the licensing model.
 
 **Content outline:**
 
-- Ledgerise is dual-licensed: the open-source version is available under Apache 2.0 (free to self-host). The commercial on-premise deployment requires a separate commercial license.
+- Ledgerise offers a free online demo for evaluation and a commercial on-premise license for production deployments.
 - What the commercial license gives you: a versioned Docker image from the private registry, implementation support, and a version support window.
 - Ledgerise does not host your data. Your data stays in your infrastructure.
 - The commercial license is based on monthly imported source rows (the number of transactions Ledgerise ingests per month).

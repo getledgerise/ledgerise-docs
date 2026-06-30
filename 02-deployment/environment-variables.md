@@ -19,7 +19,7 @@ These four variables must be set before the application can start. Missing any o
 | `DATABASE_URL` | PostgreSQL connection string. Format: `postgresql://user:password@host:5432/dbname`. The API and worker both connect to this database. |
 | `AUTH_TOKEN_SECRET` | Secret used to sign and verify dashboard session tokens. Must be a strong random value. Generate one with `openssl rand -hex 64`. Rotate this value to invalidate all active sessions. |
 | `LEDGERISE_CREDENTIALS_KEY` | AES-256-GCM encryption key for adapter credentials (API keys, OAuth tokens) and AI provider keys stored in the database. Must be a 64-character hex string. Generate one with `openssl rand -hex 32`. **This value cannot be changed after credentials have been stored without re-encrypting the existing data.** |
-| `VITE_API_BASE_URL` | The public URL of the Ledgerise API, as it is reachable from a user's browser — for example, `https://api.your-domain.com`. This value is compiled into the web dashboard bundle at build time, not read at runtime. For Docker deployments, Ledgerise sets this during image preparation. For VPS deployments, it must be set before running `npm run build`. |
+| `VITE_API_BASE_URL` | The public URL of the Ledgerise API, as it is reachable from a user's browser — for example, `https://api.your-domain.com`. This value is compiled into the web dashboard bundle at build time, not read at runtime. Ledgerise sets this during Docker image preparation. |
 
 > **Treat `AUTH_TOKEN_SECRET` and `LEDGERISE_CREDENTIALS_KEY` as secrets.** Do not commit them to version control. Do not log them. Use a secrets manager or a `.env` file with restricted permissions (`chmod 600 .env`).
 

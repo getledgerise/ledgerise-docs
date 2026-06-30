@@ -23,7 +23,7 @@ For high-volume operators where losing even an hour of transaction data is signi
 
 ## taking a backup with pg_dump
 
-For a VPS or self-managed PostgreSQL instance, use `pg_dump`:
+For a self-managed or external PostgreSQL instance, use `pg_dump`:
 
 ```bash
 pg_dump \

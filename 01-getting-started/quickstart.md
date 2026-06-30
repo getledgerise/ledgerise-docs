@@ -12,7 +12,7 @@ This guide takes you from a fresh Ledgerise deployment to your first posted jour
 
 Make sure you have the following ready:
 
-- A running Ledgerise deployment — Docker or VPS. If you have not deployed yet, start with the [deployment overview](../02-deployment/overview.md).
+- A running Ledgerise deployment. If you have not deployed yet, start with the [deployment overview](../02-deployment/overview.md).
 - Your Ledgerise commercial license key and public key, provided by Ledgerise via the key delivery flow.
 - Credentials for your accounting system. For Zoho Books: your Client ID, Client Secret, and Organization ID.
 - Access to your accounting system to view your chart of accounts.

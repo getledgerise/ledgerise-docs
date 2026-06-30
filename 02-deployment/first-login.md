@@ -78,15 +78,10 @@ After resetting, activate your commercial license on the same screen.
 **First login fails immediately:** Migrations may not have completed. Verify that you ran migrations before starting the API, then restart the API service:
 
 ```bash
-# Docker
 docker compose --profile tools run --rm migrate
 docker compose restart api
-
-# VPS
-node --env-file=/opt/ledgerise/.env scripts/run-migrations.mjs
-sudo systemctl restart ledgerise-api
 ```
 
 **The dashboard loads but shows "failed to fetch":** The web bundle was built with the wrong `VITE_API_BASE_URL`. The API and dashboard are running on different URLs, and the browser cannot reach the API. Check your nginx proxy configuration and the URL used during the build.
 
-→ More troubleshooting: [docker deployment](docker-deployment.md#troubleshooting) | [vps deployment](vps-deployment.md#troubleshooting)
+→ More troubleshooting: [docker deployment](docker-deployment.md#troubleshooting)

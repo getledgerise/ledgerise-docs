@@ -1,6 +1,6 @@
 # deployment overview
 
-Ledgerise is **customer-managed infrastructure**. You run it in your own cloud, VPS, or on-premise environment. Ledgerise does not host your transaction data, your database, or your credentials — those stay entirely within your control.
+Ledgerise is **customer-managed infrastructure**. You run it in your own cloud or on-premise environment. Ledgerise does not host your transaction data, your database, or your credentials — those stay entirely within your control.
 
 ---
 
@@ -16,23 +16,13 @@ Before deploying, have the following ready:
 
 ---
 
-## two deployment paths
+## deployment
 
-### docker (recommended)
+Ledgerise is deployed via Docker Compose. You receive a versioned Docker image from the Ledgerise private registry, configure a small set of environment variables, and run it with Docker Compose.
 
-The primary commercial path. Ledgerise builds and maintains a versioned Docker image. You receive the image, configure a small set of environment variables, and run it with Docker Compose.
-
-Commercial customers do not receive the source code or build context — only the compiled, versioned image. The image includes the API, web dashboard, and worker in a single container, split into three services by the Compose file.
+You do not receive source code or a build context — only the compiled, versioned image. The image includes the API, web dashboard, and worker split into three services by the Compose file.
 
 → [Docker deployment guide](docker-deployment.md)
-
-### vps from source
-
-A source-based deployment for internal demos, development environments, or operators who want to self-manage the build. This path requires Node.js 20, nginx, and systemd, and involves more manual steps.
-
-> This path is not the primary commercial delivery. If you have a commercial license, use Docker.
-
-→ [VPS deployment guide](vps-deployment.md)
 
 ---
 
@@ -77,7 +67,6 @@ Once you are satisfied with your setup, you activate your commercial license in 
 ## where to go next
 
 - [Docker deployment](docker-deployment.md) — the step-by-step guide for Docker Compose deployments
-- [VPS deployment](vps-deployment.md) — for source-based installs
 - [Environment variables](environment-variables.md) — complete reference for all configuration options
 - [First login](first-login.md) — what to do immediately after deployment
 
