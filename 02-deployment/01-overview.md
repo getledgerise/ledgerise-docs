@@ -12,7 +12,7 @@ Before deploying, have the following ready:
 - A **PostgreSQL database** — this is where all Ledgerise data is stored. Ledgerise does not provide or manage this database.
 - Your **Ledgerise commercial license key and public key**, provided by email during onboarding.
 - Credentials for your accounting system (for example, Zoho Books Client ID and Client Secret).
-- A domain name or internal hostname for the Ledgerise dashboard and API, so you can set `VITE_API_BASE_URL` correctly.
+- A domain name or internal hostname for the Ledgerise dashboard and API, so you can set `PUBLIC_API_BASE_URL` correctly.
 
 ---
 

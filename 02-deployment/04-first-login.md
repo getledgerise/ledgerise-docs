@@ -82,6 +82,6 @@ docker compose --profile tools run --rm migrate
 docker compose restart api
 ```
 
-**The dashboard loads but shows "failed to fetch":** The web bundle was built with the wrong `VITE_API_BASE_URL`. The API and dashboard are running on different URLs, and the browser cannot reach the API. Check your nginx proxy configuration and the URL used during the build.
+**The dashboard loads but shows "failed to fetch":** The web service may not be serving the correct `PUBLIC_API_BASE_URL`, or nginx may be routing the dashboard/API domains incorrectly. Check `/runtime-config.js` on the dashboard domain and confirm it contains the public API URL your browser should call.
 
 → More troubleshooting: [docker deployment](02-docker-deployment.md#troubleshooting)

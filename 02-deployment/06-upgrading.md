@@ -67,4 +67,14 @@ Common causes: a new required environment variable that is not yet set in `.env`
 
 ### dashboard shows blank page or "failed to fetch"
 
-The web build may need to be rebuilt. Contact Ledgerise for a rebuilt image if a new release changes the frontend bundle.
+Check the dashboard runtime config before assuming the image is wrong:
+
+```bash
+curl https://your-dashboard-domain/runtime-config.js
+```
+
+It should contain the public API URL. If it does not, update `PUBLIC_API_BASE_URL` in `.env` and restart the `web` service:
+
+```bash
+docker compose restart web
+```

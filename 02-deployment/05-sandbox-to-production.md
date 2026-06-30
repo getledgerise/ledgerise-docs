@@ -19,7 +19,7 @@ Take the time to work through this checklist in sandbox mode. It is designed to 
 - [ ] `DATABASE_URL` points to your production PostgreSQL database, not a local or demo instance.
 - [ ] `AUTH_TOKEN_SECRET` is a strong, unique random value — not a placeholder.
 - [ ] `LEDGERISE_CREDENTIALS_KEY` is a 64-character hex value — not a placeholder.
-- [ ] `VITE_API_BASE_URL` matches the actual public URL of your API.
+- [ ] `PUBLIC_API_BASE_URL` matches the actual public URL of your API.
 - [ ] The API is served behind TLS (HTTPS). Do not go live on unencrypted HTTP.
 - [ ] The health check endpoint (`/healthcheck`) returns `"repository":"postgres"` and `"db":"ok"`.
 

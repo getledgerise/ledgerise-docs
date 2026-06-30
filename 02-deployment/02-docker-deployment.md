@@ -13,7 +13,7 @@ Before you begin, make sure you have:
 - **Docker** and **Docker Compose** installed on the server.
 - A **PostgreSQL 14+** database accessible from the server. This can be a managed database (AWS RDS, Supabase, etc.) or a self-managed instance.
 - Your **Ledgerise image access credentials**, provided in your onboarding email.
-- Your domain name or IP address, so you can set `VITE_API_BASE_URL`.
+- Your domain name or IP address, so you can set `PUBLIC_API_BASE_URL`.
 - The four required environment variable values listed in step 2.
 
 ---
@@ -49,9 +49,9 @@ Four variables are required before the application can start:
 | `DATABASE_URL` | Your PostgreSQL connection string, e.g. `postgresql://ledgerise:password@host:5432/ledgerise` |
 | `AUTH_TOKEN_SECRET` | A strong random secret for signing session tokens. Generate one: `openssl rand -hex 64` |
 | `LEDGERISE_CREDENTIALS_KEY` | A 64-character hex key for encrypting adapter credentials. Generate one: `openssl rand -hex 32` |
-| `VITE_API_BASE_URL` | The public URL of your API, e.g. `https://api.your-domain.com` |
+| `PUBLIC_API_BASE_URL` | The public URL of your API, e.g. `https://api.your-domain.com` |
 
-> **On `VITE_API_BASE_URL`:** This value is compiled into the browser bundle at build time, not read at runtime. For commercial customers using the pre-built image, Ledgerise builds this into the image during image preparation for your deployment. If you need a different API URL, contact Ledgerise — a rebuild is required.
+> **On `PUBLIC_API_BASE_URL`:** The Docker web service serves this value to browsers at runtime through `/runtime-config.js`. You can change the API URL by updating `.env` and restarting the `web` service; you do not need a rebuilt image just to change domains.
 
 → Full reference: [environment variables](03-environment-variables.md)
 
@@ -136,7 +136,25 @@ The dashboard should load with a **Sandbox** badge in the top navigation bar. If
 
 ### dashboard shows "failed to fetch"
 
-The frontend was built with the wrong or missing `VITE_API_BASE_URL`. This value is compiled into the browser bundle — changing `.env` after the image is built does not fix it. Contact Ledgerise for a rebuilt image with the correct API URL.
+The web service may not be receiving the correct `PUBLIC_API_BASE_URL`, or your reverse proxy may be serving an old static dashboard instead of the Docker `web` service.
+
+Check the runtime config your browser receives:
+
+```bash
+curl https://your-dashboard-domain/runtime-config.js
+```
+
+The response should contain your public API URL:
+
+```js
+window.__LEDGERISE_CONFIG__ = {"apiBaseUrl":"https://api.your-domain.com"};
+```
+
+If it is wrong, update `PUBLIC_API_BASE_URL` in `.env` and restart the web service:
+
+```bash
+docker compose restart web
+```
 
 ### api shows `"repository":"memory"` in healthcheck
 
