@@ -34,7 +34,7 @@ The entry point for all new users. Covers what Ledgerise is, how it works at a h
 
 ---
 
-### `01-getting-started/introduction.md`
+### `01-getting-started/01-introduction.md`
 
 **Audience:** Everyone — Finance Officers, Admins, Auditors, and Developers reading for the first time.
 
@@ -51,7 +51,7 @@ The entry point for all new users. Covers what Ledgerise is, how it works at a h
 
 ---
 
-### `01-getting-started/how-ledgerise-works.md`
+### `01-getting-started/02-how-ledgerise-works.md`
 
 **Audience:** Finance Officers, Admins, anyone wanting to understand the system before configuring it.
 
@@ -71,7 +71,7 @@ The entry point for all new users. Covers what Ledgerise is, how it works at a h
 
 ---
 
-### `01-getting-started/key-concepts.md`
+### `01-getting-started/03-key-concepts.md`
 
 **Audience:** Finance Officers and Admins encountering Ledgerise terminology for the first time.
 
@@ -100,7 +100,7 @@ Terms to cover:
 
 ---
 
-### `01-getting-started/quickstart.md`
+### `01-getting-started/04-quickstart.md`
 
 **Audience:** Admins setting up Ledgerise for the first time.
 
@@ -131,7 +131,7 @@ For the Admin or DevOps person responsible for installing and running Ledgerise.
 
 ---
 
-### `02-deployment/overview.md`
+### `02-deployment/01-overview.md`
 
 **Audience:** Admins.
 
@@ -142,13 +142,13 @@ For the Admin or DevOps person responsible for installing and running Ledgerise.
 - What the system needs: a server, a PostgreSQL database, a license key, and your credentials for adapters and your accounting system.
 - What Ledgerise provides: a versioned Docker image, this documentation, and implementation support for commercial customers.
 - Brief architecture: three services (api, web, worker) + your database.
-- Link forward to docker-deployment.md.
+- Link forward to 02-docker-deployment.md.
 
 `[SCREENSHOT: docker compose ps output showing api, web, and worker services all running]`
 
 ---
 
-### `02-deployment/docker-deployment.md`
+### `02-deployment/02-docker-deployment.md`
 
 **Audience:** Admins.
 
@@ -156,7 +156,7 @@ For the Admin or DevOps person responsible for installing and running Ledgerise.
 
 - Prerequisites: Docker, Docker Compose, a running PostgreSQL instance, your .env values.
 - Step 1: Pull the Ledgerise image (commercial customers pull from the private registry; the command is provided in your onboarding email).
-- Step 2: Configure your `.env` file — copy `.env.example` to `.env` and fill in required values. Link to environment-variables.md.
+- Step 2: Configure your `.env` file — copy `.env.example` to `.env` and fill in required values. Link to 03-environment-variables.md.
 - Step 3: Run database migrations.
 - Step 4: Start the services (`docker compose up -d api web worker`).
 - Step 5: Verify with the health check endpoint.
@@ -171,7 +171,7 @@ For the Admin or DevOps person responsible for installing and running Ledgerise.
 
 ---
 
-### `02-deployment/environment-variables.md`
+### `02-deployment/03-environment-variables.md`
 
 **Audience:** Admins.
 
@@ -190,7 +190,7 @@ Note on secrets: AUTH_TOKEN_SECRET and LEDGERISE_CREDENTIALS_KEY are security-se
 
 ---
 
-### `02-deployment/first-login.md`
+### `02-deployment/04-first-login.md`
 
 **Audience:** Admins after a fresh deployment.
 
@@ -207,7 +207,7 @@ Note on secrets: AUTH_TOKEN_SECRET and LEDGERISE_CREDENTIALS_KEY are security-se
 
 ---
 
-### `02-deployment/sandbox-to-production.md`
+### `02-deployment/05-sandbox-to-production.md`
 
 **Audience:** Admins completing initial setup before go-live.
 
@@ -239,7 +239,7 @@ Post-activation:
 
 ---
 
-### `02-deployment/upgrading.md`
+### `02-deployment/06-upgrading.md`
 
 **Audience:** Admins.
 
@@ -261,7 +261,7 @@ Covers how transaction data enters Ledgerise and how to work with the Transactio
 
 ---
 
-### `03-transactions/overview.md`
+### `03-transactions/01-overview.md`
 
 **Audience:** Finance Officers, Admins.
 
@@ -278,7 +278,7 @@ Covers how transaction data enters Ledgerise and how to work with the Transactio
 
 ---
 
-### `03-transactions/ingestion-methods.md`
+### `03-transactions/02-ingestion-methods.md`
 
 **Audience:** Admins and Finance Officers who manage data sources.
 
@@ -294,7 +294,7 @@ Covers how transaction data enters Ledgerise and how to work with the Transactio
 
 ---
 
-### `03-transactions/webhook-adapter.md`
+### `03-transactions/03-webhook-adapter.md`
 
 **Audience:** Admins and developers integrating a source system via webhook.
 
@@ -313,7 +313,7 @@ Covers how transaction data enters Ledgerise and how to work with the Transactio
 
 ---
 
-### `03-transactions/csv-import.md`
+### `03-transactions/04-csv-import.md`
 
 **Audience:** Finance Officers and Admins importing a batch of transactions from a file.
 
@@ -332,7 +332,7 @@ Covers how transaction data enters Ledgerise and how to work with the Transactio
 
 ---
 
-### `03-transactions/poll-adapter.md`
+### `03-transactions/05-poll-adapter.md`
 
 **Audience:** Admins configuring scheduled API polling from a source system.
 
@@ -347,7 +347,7 @@ Covers how transaction data enters Ledgerise and how to work with the Transactio
 
 ---
 
-### `03-transactions/transaction-statuses.md`
+### `03-transactions/06-transaction-statuses.md`
 
 **Audience:** Finance Officers.
 
@@ -375,7 +375,7 @@ Table showing the combinations that result in action vs. no action, with links t
 
 ---
 
-### `03-transactions/unmapped-transactions.md`
+### `03-transactions/07-unmapped-transactions.md`
 
 **Audience:** Finance Officers.
 
@@ -402,9 +402,9 @@ Table showing the combinations that result in action vs. no action, with links t
 
 ---
 
-### discrepancy 1 — reconciliation omitted from the architecture in `how-ledgerise-works.md` (critical)
+### discrepancy 1 — reconciliation omitted from the architecture in `02-how-ledgerise-works.md` (critical)
 
-**File:** `01-getting-started/how-ledgerise-works.md`
+**File:** `01-getting-started/02-how-ledgerise-works.md`
 
 **Problem:** The page describes a "three-layer architecture" (inbound adapters → journal engine → outbound adapters) and omits reconciliation entirely from the data flow. The ASCII diagram shows only:
 
@@ -412,13 +412,13 @@ Table showing the combinations that result in action vs. no action, with links t
 Source System → Inbound Adapters → Journal Engine → Accounting System
 ```
 
-This contradicts the core loop stated in `introduction.md` and in both source documents:
+This contradicts the core loop stated in `01-introduction.md` and in both source documents:
 
 ```
 Transactions in → Reconciliation → Classification → Journal entries out
 ```
 
-The "three-layer" framing accurately describes the adapter pluggability pattern (how source systems and accounting systems are decoupled) but is not a complete description of the operational data flow. Reconciliation is a distinct module that sits between ingestion and classification — it is not one of the three adapter layers. A reader who reads `introduction.md` first (correctly sees four stages) and then reads `how-ledgerise-works.md` (sees three stages, no reconciliation) is left with an inconsistent mental model.
+The "three-layer" framing accurately describes the adapter pluggability pattern (how source systems and accounting systems are decoupled) but is not a complete description of the operational data flow. Reconciliation is a distinct module that sits between ingestion and classification — it is not one of the three adapter layers. A reader who reads `01-introduction.md` first (correctly sees four stages) and then reads `02-how-ledgerise-works.md` (sees three stages, no reconciliation) is left with an inconsistent mental model.
 
 **Required fixes:**
 
@@ -439,9 +439,9 @@ The "three-layer" framing accurately describes the adapter pluggability pattern 
 
 ---
 
-### discrepancy 2 — reconciliation missing from the setup flow in `quickstart.md` (critical)
+### discrepancy 2 — reconciliation missing from the setup flow in `04-quickstart.md` (critical)
 
-**File:** `01-getting-started/quickstart.md`
+**File:** `01-getting-started/04-quickstart.md`
 
 **Problem:** The quickstart has 9 steps, none of which include reconciliation setup. The current flow goes: adapters → mapping rules → import test data → run engine → invite team → go live. This contradicts IA Flow 1, which explicitly includes:
 
@@ -467,19 +467,19 @@ A Finance Officer following the quickstart will go live without having configure
 
 ### discrepancy 3 — COA "imports" vs "syncs" inconsistent across pages (minor)
 
-**File:** `01-getting-started/key-concepts.md`, line 33, plus `quickstart.md`, `sandbox-to-production.md`, `first-login.md`, `overview.md`
+**File:** `01-getting-started/03-key-concepts.md`, line 33, plus `04-quickstart.md`, `05-sandbox-to-production.md`, `04-first-login.md`, `01-overview.md`
 
-**Problem:** `key-concepts.md` line 31 correctly says Ledgerise "**imports** a read-only copy" of the COA — this is the correct terminology, confirmed against source. But line 33 of the same entry says to "**sync** the updated list into Ledgerise," and every other written page (`quickstart.md` step 3, `sandbox-to-production.md`, `first-login.md`, `overview.md`) uses "sync" / "Sync Now" for the same action. This is backwards — the correct verb is **import**, not sync.
+**Problem:** `03-key-concepts.md` line 31 correctly says Ledgerise "**imports** a read-only copy" of the COA — this is the correct terminology, confirmed against source. But line 33 of the same entry says to "**sync** the updated list into Ledgerise," and every other written page (`04-quickstart.md` step 3, `05-sandbox-to-production.md`, `04-first-login.md`, `01-overview.md`) uses "sync" / "Sync Now" for the same action. This is backwards — the correct verb is **import**, not sync.
 
 **Required fix:**
 
-Standardize on "import" terminology everywhere. Change `key-concepts.md` line 33 to use "import" instead of "sync." Change the UI action references in `quickstart.md`, `sandbox-to-production.md`, `first-login.md`, and `overview.md` from "sync" / "Sync Now" to "import" / "Import COA."
+Standardize on "import" terminology everywhere. Change `03-key-concepts.md` line 33 to use "import" instead of "sync." Change the UI action references in `04-quickstart.md`, `05-sandbox-to-production.md`, `04-first-login.md`, and `01-overview.md` from "sync" / "Sync Now" to "import" / "Import COA."
 
 ---
 
 ### discrepancy 4 — sandbox-to-production frames reconciliation as optional (moderate)
 
-**File:** `02-deployment/sandbox-to-production.md`
+**File:** `02-deployment/05-sandbox-to-production.md`
 
 **Problem:** The reconciliation section is headed **"reconciliation (if applicable)"** and presents the two checklist items (report sources and reconciliation rules) as optional. This contradicts IA Flow 1, which lists reconciliation as a standard step in first-time setup. Framing it as optional will lead operators to skip it entirely, resulting in no reconciliation infrastructure when the first provider statement arrives post-launch.
 
@@ -493,9 +493,9 @@ Standardize on "import" terminology everywhere. Change `key-concepts.md` line 33
 
 ---
 
-### discrepancy 5 — `key-concepts.md` defines reconciliation terms without placing them in the flow (minor)
+### discrepancy 5 — `03-key-concepts.md` defines reconciliation terms without placing them in the flow (minor)
 
-**File:** `01-getting-started/key-concepts.md`
+**File:** `01-getting-started/03-key-concepts.md`
 
 **Problem:** The `reconciliation run` definition correctly explains what a run is and how it is triggered, but never states where reconciliation sits in the operational sequence relative to transactions and journal posting. Without this context, reconciliation reads as an independent side activity rather than stage 2 of the core loop. A new reader cannot tell from the key-concepts page whether reconciliation happens before or after journal posting.
 
@@ -511,11 +511,11 @@ Add one or two sentences at the top of the `reconciliation run` entry positionin
 
 | # | Discrepancy | File | Severity |
 |---|---|---|---|
-| 1 | Reconciliation omitted from architecture and diagram | `01-getting-started/how-ledgerise-works.md` | Critical |
-| 2 | Reconciliation setup step missing from quickstart flow | `01-getting-started/quickstart.md` | Critical |
-| 3 | COA: "sync" language should be "import" | `01-getting-started/key-concepts.md` (line 33) + cross-file | Minor |
-| 4 | Reconciliation framed as optional in go-live checklist | `02-deployment/sandbox-to-production.md` | Moderate |
-| 5 | Reconciliation terms defined without flow context | `01-getting-started/key-concepts.md` | Minor |
+| 1 | Reconciliation omitted from architecture and diagram | `01-getting-started/02-how-ledgerise-works.md` | Critical |
+| 2 | Reconciliation setup step missing from quickstart flow | `01-getting-started/04-quickstart.md` | Critical |
+| 3 | COA: "sync" language should be "import" | `01-getting-started/03-key-concepts.md` (line 33) + cross-file | Minor |
+| 4 | Reconciliation framed as optional in go-live checklist | `02-deployment/05-sandbox-to-production.md` | Moderate |
+| 5 | Reconciliation terms defined without flow context | `01-getting-started/03-key-concepts.md` | Minor |
 
 ---
 
@@ -525,7 +525,7 @@ Covers how to verify internal transaction records against external counterparty 
 
 ---
 
-### `04-reconciliation/overview.md`
+### `04-reconciliation/01-overview.md`
 
 **Audience:** Finance Officers, Admins.
 
@@ -542,7 +542,7 @@ Covers how to verify internal transaction records against external counterparty 
 
 ---
 
-### `04-reconciliation/importing-a-statement.md`
+### `04-reconciliation/02-importing-a-statement.md`
 
 **Audience:** Finance Officers.
 
@@ -557,7 +557,7 @@ Covers how to verify internal transaction records against external counterparty 
   5. Review the field mapping. Map columns in the file to the fields Ledgerise uses for matching (amount, reference, date, status).
   6. Confirm import. Ledgerise runs the match and lands on the Breaks tab if any discrepancies are found.
 - How report sources work: the name you assign to a source (`Source Name — Report Name`) is used consistently across all your reconciliation runs and rules.
-- Managing report sources: Settings → (link to settings/system-settings.md).
+- Managing report sources: Settings → (link to settings/03-system-settings.md).
 
 `[SCREENSHOT: Import Statement drawer showing the report source selection step with "Paystack — Settlement Report" as an example]`
 
@@ -567,7 +567,7 @@ Covers how to verify internal transaction records against external counterparty 
 
 ---
 
-### `04-reconciliation/understanding-matches.md`
+### `04-reconciliation/03-understanding-matches.md`
 
 **Audience:** Finance Officers.
 
@@ -586,7 +586,7 @@ Covers how to verify internal transaction records against external counterparty 
 
 ---
 
-### `04-reconciliation/resolving-breaks.md`
+### `04-reconciliation/04-resolving-breaks.md`
 
 **Audience:** Finance Officers.
 
@@ -611,7 +611,7 @@ Covers how to verify internal transaction records against external counterparty 
 
 ---
 
-### `04-reconciliation/reconciliation-rules.md`
+### `04-reconciliation/05-reconciliation-rules.md`
 
 **Audience:** Finance Officers and Admins.
 
@@ -646,7 +646,7 @@ Covers how to verify internal transaction records against external counterparty 
 
 ---
 
-### `04-reconciliation/generating-reports.md`
+### `04-reconciliation/06-generating-reports.md`
 
 **Audience:** Finance Officers.
 
@@ -674,7 +674,7 @@ Covers how to verify internal transaction records against external counterparty 
 
 ---
 
-### `04-reconciliation/evidence-packages.md`
+### `04-reconciliation/07-evidence-packages.md`
 
 **Audience:** Finance Officers, Admins, Auditors.
 
@@ -698,7 +698,7 @@ Covers how Finance Officers configure which accounting entries are generated for
 
 ---
 
-### `05-mapping-rules/overview.md`
+### `05-mapping-rules/01-overview.md`
 
 **Audience:** Finance Officers, Admins.
 
@@ -714,7 +714,7 @@ Covers how Finance Officers configure which accounting entries are generated for
 
 ---
 
-### `05-mapping-rules/creating-a-rule.md`
+### `05-mapping-rules/02-creating-a-rule.md`
 
 **Audience:** Finance Officers.
 
@@ -741,7 +741,7 @@ Covers how Finance Officers configure which accounting entries are generated for
 
 ---
 
-### `05-mapping-rules/rule-resolution-order.md`
+### `05-mapping-rules/03-rule-resolution-order.md`
 
 **Audience:** Finance Officers.
 
@@ -763,7 +763,7 @@ Priority order (highest to lowest):
 
 ---
 
-### `05-mapping-rules/chart-of-accounts.md`
+### `05-mapping-rules/04-chart-of-accounts.md`
 
 **Audience:** Finance Officers and Admins.
 
@@ -780,7 +780,7 @@ Priority order (highest to lowest):
 
 ---
 
-### `05-mapping-rules/rule-audit-trail.md`
+### `05-mapping-rules/05-rule-audit-trail.md`
 
 **Audience:** Finance Officers, Admins, Auditors.
 
@@ -803,7 +803,7 @@ Covers how to monitor and manage the double-entry journal entries generated by t
 
 ---
 
-### `06-journal-log/overview.md`
+### `06-journal-log/01-overview.md`
 
 **Audience:** Finance Officers, Admins, Auditors.
 
@@ -819,7 +819,7 @@ Covers how to monitor and manage the double-entry journal entries generated by t
 
 ---
 
-### `06-journal-log/journal-entries.md`
+### `06-journal-log/02-journal-entries.md`
 
 **Audience:** Finance Officers, Auditors.
 
@@ -840,7 +840,7 @@ Covers how to monitor and manage the double-entry journal entries generated by t
 
 ---
 
-### `06-journal-log/retrying-failed-entries.md`
+### `06-journal-log/03-retrying-failed-entries.md`
 
 **Audience:** Finance Officers.
 
@@ -862,7 +862,7 @@ Covers how to monitor and manage the double-entry journal entries generated by t
 
 ---
 
-### `06-journal-log/exporting-journal-data.md`
+### `06-journal-log/04-exporting-journal-data.md`
 
 **Audience:** Finance Officers.
 
@@ -884,7 +884,7 @@ Covers system configuration. Audience is primarily Admins, with Finance Officers
 
 ---
 
-### `07-settings/adapters.md`
+### `07-settings/01-adapters.md`
 
 **Audience:** Admins, Finance Officers (read-only).
 
@@ -903,7 +903,7 @@ Covers system configuration. Audience is primarily Admins, with Finance Officers
 
 ---
 
-### `07-settings/users-and-roles.md`
+### `07-settings/02-users-and-roles.md`
 
 **Audience:** Admins.
 
@@ -930,7 +930,7 @@ Covers system configuration. Audience is primarily Admins, with Finance Officers
 
 ---
 
-### `07-settings/system-settings.md`
+### `07-settings/03-system-settings.md`
 
 **Audience:** Admins.
 
@@ -956,7 +956,7 @@ Covers system configuration. Audience is primarily Admins, with Finance Officers
 
 ---
 
-### `07-settings/audit-log.md`
+### `07-settings/04-audit-log.md`
 
 **Audience:** Admins, Auditors.
 
@@ -980,7 +980,7 @@ For Admins configuring existing adapters and for developers building new ones.
 
 ---
 
-### `08-adapters/overview.md`
+### `08-adapters/01-overview.md`
 
 **Audience:** Admins and developers.
 
@@ -990,12 +990,12 @@ For Admins configuring existing adapters and for developers building new ones.
 - Two directions: inbound adapters bring transaction data in; outbound adapters push journal entries out.
 - Four inbound modes: webhook, file import, poll, and manual entry.
 - MVP built-in adapters and what each is for.
-- External/community adapters: developers can build adapters for any source or target system without changing the core engine. Link to building-an-adapter.md.
+- External/community adapters: developers can build adapters for any source or target system without changing the core engine. Link to 03-building-an-adapter.md.
 - All adapters expose the same interface (meta, validate, normalize, healthcheck) and speak the same canonical transaction schema.
 
 ---
 
-### `08-adapters/adapter-spec.md`
+### `08-adapters/02-adapter-spec.md`
 
 **Audience:** Developers building a new adapter.
 
@@ -1018,7 +1018,7 @@ This page surfaces the same content as the existing `ADAPTER-SPEC.md` but writte
 
 ---
 
-### `08-adapters/building-an-adapter.md`
+### `08-adapters/03-building-an-adapter.md`
 
 **Audience:** Developers.
 
@@ -1035,13 +1035,13 @@ A practical walkthrough for building a new inbound adapter from scratch.
 - Step 6: write tests (at minimum: valid completed transaction, failed transaction, missing fields, test environment).
 - Step 7: add fixture files in `/fixtures`.
 - Step 8: write a README for your adapter.
-- Step 9: register the adapter (link to adapter-spec.md § Registration).
+- Step 9: register the adapter (link to 02-adapter-spec.md § Registration).
 
 `[SCREENSHOT: Example normalize() implementation showing field mapping from a Paystack webhook payload to the canonical schema]`
 
 ---
 
-### `08-adapters/generic-webhook.md`
+### `08-adapters/04-generic-webhook.md`
 
 **Audience:** Admins integrating a transaction source via webhook.
 
@@ -1056,7 +1056,7 @@ A practical walkthrough for building a new inbound adapter from scratch.
 
 ---
 
-### `08-adapters/generic-csv.md`
+### `08-adapters/05-generic-csv.md`
 
 **Audience:** Admins and Finance Officers.
 
@@ -1065,12 +1065,12 @@ A practical walkthrough for building a new inbound adapter from scratch.
 - Overview of the generic CSV adapter.
 - Supported file formats: CSV and XLSX.
 - Configuration: column mapping, date format, amount format (full currency unit vs. smallest unit), delimiter.
-- The import flow from the UI (link to transactions/csv-import.md for the step-by-step).
+- The import flow from the UI (link to transactions/04-csv-import.md for the step-by-step).
 - How the column mapping is saved and reused across imports from the same source.
 
 ---
 
-### `08-adapters/generic-poll.md`
+### `08-adapters/06-generic-poll.md`
 
 **Audience:** Admins.
 
@@ -1084,7 +1084,7 @@ A practical walkthrough for building a new inbound adapter from scratch.
 
 ---
 
-### `08-adapters/zoho-books.md`
+### `08-adapters/07-zoho-books.md`
 
 **Audience:** Admins.
 
@@ -1103,7 +1103,7 @@ A practical walkthrough for building a new inbound adapter from scratch.
 
 ---
 
-### `08-adapters/journal-csv-export.md`
+### `08-adapters/08-journal-csv-export.md`
 
 **Audience:** Admins and Finance Officers whose accounting system has no API integration.
 
@@ -1124,7 +1124,7 @@ For Admins and commercial clients understanding the licensing model.
 
 ---
 
-### `09-licensing/overview.md`
+### `09-licensing/01-overview.md`
 
 **Audience:** Admins and procurement stakeholders.
 
@@ -1139,7 +1139,7 @@ For Admins and commercial clients understanding the licensing model.
 
 ---
 
-### `09-licensing/commercial-tiers.md`
+### `09-licensing/02-commercial-tiers.md`
 
 **Audience:** Admins and procurement stakeholders.
 
@@ -1161,7 +1161,7 @@ For Admins and commercial clients understanding the licensing model.
 
 ---
 
-### `09-licensing/activating-your-license.md`
+### `09-licensing/03-activating-your-license.md`
 
 **Audience:** Admins.
 
@@ -1185,7 +1185,7 @@ For Admins and commercial clients understanding the licensing model.
 
 ---
 
-### `09-licensing/license-renewal-and-reissuance.md`
+### `09-licensing/04-license-renewal-and-reissuance.md`
 
 **Audience:** Admins.
 
@@ -1205,7 +1205,7 @@ For Admins responsible for backups, restores, and data retention.
 
 ---
 
-### `10-data-management/backups.md`
+### `10-data-management/01-backups.md`
 
 **Audience:** Admins.
 
@@ -1221,7 +1221,7 @@ For Admins responsible for backups, restores, and data retention.
 
 ---
 
-### `10-data-management/restore.md`
+### `10-data-management/02-restore.md`
 
 **Audience:** Admins.
 
@@ -1238,7 +1238,7 @@ For Admins responsible for backups, restores, and data retention.
 
 ---
 
-### `10-data-management/retention-policy.md`
+### `10-data-management/03-retention-policy.md`
 
 **Audience:** Admins, Finance Officers.
 
@@ -1258,7 +1258,7 @@ For Admins responsible for securing a Ledgerise deployment.
 
 ---
 
-### `11-security/access-control.md`
+### `11-security/01-access-control.md`
 
 **Audience:** Admins.
 
@@ -1266,13 +1266,13 @@ For Admins responsible for securing a Ledgerise deployment.
 
 - Authentication: all Ledgerise dashboard access requires a username and password. There is no anonymous access.
 - Session management: sessions expire after 8 hours of inactivity. Users are prompted to log in again.
-- Role-based access control: three roles — Admin, Finance, and Auditor. Covered in full in settings/users-and-roles.md.
+- Role-based access control: three roles — Admin, Finance, and Auditor. Covered in full in settings/02-users-and-roles.md.
 - User account best practices: every team member gets a named account. Shared credentials are not permitted. Deactivate accounts for team members who leave.
 - API keys for webhook adapters: each webhook adapter has its own signing secret. Rotate these secrets independently in Settings → Adapters. Rotation does not require downtime — configure the new secret in the adapter config before updating your source system.
 
 ---
 
-### `11-security/data-protection.md`
+### `11-security/02-data-protection.md`
 
 **Audience:** Admins.
 
@@ -1287,7 +1287,7 @@ For Admins responsible for securing a Ledgerise deployment.
 
 ---
 
-### `11-security/webhook-security.md`
+### `11-security/03-webhook-security.md`
 
 **Audience:** Admins and developers integrating source systems via webhook.
 
@@ -1307,7 +1307,7 @@ Technical reference material. Not task-oriented — readers come here to look up
 
 ---
 
-### `12-reference/transaction-schema.md`
+### `12-reference/01-transaction-schema.md`
 
 **Audience:** Finance Officers, Developers, Auditors.
 
@@ -1323,7 +1323,7 @@ Complete field-by-field reference for the canonical transaction schema.
 
 ---
 
-### `12-reference/transaction-types.md`
+### `12-reference/02-transaction-types.md`
 
 **Audience:** Finance Officers and Developers.
 
@@ -1350,7 +1350,7 @@ Custom types: how to define and use a transaction type not in the standard taxon
 
 ---
 
-### `12-reference/error-codes.md`
+### `12-reference/03-error-codes.md`
 
 **Audience:** Developers and Admins troubleshooting adapter errors.
 
@@ -1371,7 +1371,7 @@ Standard error codes returned by adapters in failure envelopes.
 
 ---
 
-### `12-reference/glossary.md`
+### `12-reference/04-glossary.md`
 
 **Audience:** Everyone.
 
