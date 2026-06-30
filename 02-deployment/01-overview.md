@@ -18,9 +18,9 @@ Before deploying, have the following ready:
 
 ## deployment
 
-Ledgerise is deployed via Docker Compose. You receive a versioned Docker image from the Ledgerise private registry, configure a small set of environment variables, and run it with Docker Compose.
+Ledgerise is deployed via Docker Compose. You use the public Ledgerise Docker image from GitHub Container Registry, configure a small set of environment variables, and run it with Docker Compose.
 
-You do not receive source code or a build context — only the compiled, versioned image. The image includes the API, web dashboard, and worker split into three services by the Compose file.
+You do not need source code or a build context to install Ledgerise. The image includes the API, web dashboard, worker, migrations, and operational scripts. Your license key controls production activation.
 
 → [Docker deployment guide](02-docker-deployment.md)
 

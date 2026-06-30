@@ -18,7 +18,7 @@ Contact Ledgerise to access the demo environment.
 
 The commercial license is required to run Ledgerise in a production environment. It gives you:
 
-- A versioned Docker image pulled from the Ledgerise private registry — no build toolchain, no source code required.
+- A versioned Docker image pulled from GitHub Container Registry — no build toolchain, registry login, or source code required.
 - A supported version window with changelog and migration notes for each release.
 - Implementation support: scoping, adapter configuration, mapping rule setup, and go-live assistance.
 

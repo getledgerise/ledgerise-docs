@@ -1,6 +1,6 @@
 # docker deployment
 
-This is the primary commercial deployment path. Ledgerise supplies a versioned Docker image. You run it with Docker Compose on your own server.
+This is the primary commercial deployment path. Ledgerise publishes a versioned Docker image. You run it with Docker Compose on your own server.
 
 **Who this is for:** Admins performing a fresh installation.
 
@@ -12,34 +12,100 @@ Before you begin, make sure you have:
 
 - **Docker** and **Docker Compose** installed on the server.
 - A **PostgreSQL 14+** database accessible from the server. This can be a managed database (AWS RDS, Supabase, etc.) or a self-managed instance.
-- Your **Ledgerise image access credentials**, provided in your onboarding email.
+- Your **Ledgerise commercial license key**, provided during onboarding.
 - Your domain name or IP address, so you can set `PUBLIC_API_BASE_URL`.
 - The four required environment variable values listed in step 2.
 
 ---
 
-## step 1 — pull the ledgerise image
+## step 1 — create the deployment folder
 
-Commercial customers receive a private registry URL and pull credentials in their onboarding email. Log in to the registry and pull the versioned image:
+Create one folder on the server for Ledgerise:
 
 ```bash
-docker login registry.ledgerise.io
-docker pull registry.ledgerise.io/ledgerise-cloud:<version>
+sudo mkdir -p /opt/ledgerise
+sudo chown "$USER":"$USER" /opt/ledgerise
+cd /opt/ledgerise
 ```
 
-Replace `<version>` with the version tag specified in your onboarding email or the latest release notification.
+Create `docker-compose.yml` in that folder:
+
+```yaml
+name: ledgerise-cloud
+
+x-ledgerise-env: &ledgerise-env
+  NODE_ENV: production
+  API_PORT: 3000
+
+x-ledgerise-app: &ledgerise-app
+  image: ghcr.io/getledgerise/ledgerise-cloud:${LEDGERISE_IMAGE_TAG:-0.1.0}
+  env_file:
+    - .env
+  environment:
+    <<: *ledgerise-env
+  restart: unless-stopped
+
+services:
+  api:
+    <<: *ledgerise-app
+    command: npm start -w apps/api
+    ports:
+      - "${API_PORT:-3000}:3000"
+    healthcheck:
+      test: ["CMD-SHELL", "node -e \"fetch('http://127.0.0.1:3000/healthcheck').then((r) => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))\""]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+
+  web:
+    <<: *ledgerise-app
+    command: node scripts/serve-web.mjs
+    ports:
+      - "${WEB_PORT:-3001}:3001"
+    depends_on:
+      api:
+        condition: service_healthy
+
+  worker:
+    <<: *ledgerise-app
+    command: npm start -w apps/worker
+    environment:
+      <<: *ledgerise-env
+      RUN_RECONCILIATION_QUEUE_WORKER: ${RUN_RECONCILIATION_QUEUE_WORKER:-true}
+    depends_on:
+      api:
+        condition: service_healthy
+
+  migrate:
+    <<: *ledgerise-app
+    profiles:
+      - tools
+    command: npm run migrate
+    restart: "no"
+```
 
 > The image includes the compiled API, web dashboard, worker, migrations, and operational scripts. It does not include TypeScript source files.
+
+The image is public, so `docker login` is not required. Production use still requires a valid license key in Settings → System after first login.
 
 ---
 
 ## step 2 — configure your environment file
 
-The Compose file reads configuration from a `.env` file in the project directory. Copy the example file and fill in your values:
+Create `.env` in `/opt/ledgerise` and fill in your values:
 
-```bash
-cp .env.example .env
-nano .env
+```env
+LEDGERISE_IMAGE_TAG=0.1.0
+
+DATABASE_URL=postgresql://ledgerise:change-me@your-db-host:5432/ledgerise
+AUTH_TOKEN_SECRET=replace-with-openssl-rand-hex-64
+LEDGERISE_CREDENTIALS_KEY=replace-with-openssl-rand-hex-32
+PUBLIC_API_BASE_URL=https://api.your-domain.com
+
+API_PORT=3000
+WEB_PORT=3001
+RUN_RECONCILIATION_QUEUE_WORKER=true
 ```
 
 Four variables are required before the application can start:
@@ -55,11 +121,24 @@ Four variables are required before the application can start:
 
 → Full reference: [environment variables](03-environment-variables.md)
 
+Generate the two required secrets on the server:
+
+```bash
+openssl rand -hex 64
+openssl rand -hex 32
+```
+
+Paste the first output into `AUTH_TOKEN_SECRET`. Paste the second output into `LEDGERISE_CREDENTIALS_KEY`.
+
 ---
 
 ## step 3 — run database migrations
 
 Migrations must be applied before the application starts. Use the `migrate` tool service included in the Compose file:
+
+```bash
+docker compose pull
+```
 
 ```bash
 docker compose --profile tools run --rm migrate
@@ -129,6 +208,8 @@ Sign in with the default sandbox credentials:
 The dashboard should load with a **Sandbox** badge in the top navigation bar. If you see this badge, your deployment is running correctly.
 
 → What to do next: [first login](04-first-login.md)
+
+After first login, activate production from Settings → System using your Ledgerise license key. You do not need a license key in `.env`.
 
 ---
 

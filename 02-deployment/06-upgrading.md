@@ -16,6 +16,14 @@ When Ledgerise publishes a new version, you will receive an email with a changel
 
 This is the standard upgrade path for commercial customers:
 
+First edit `.env` and change `LEDGERISE_IMAGE_TAG` to the version from the Ledgerise release notice:
+
+```env
+LEDGERISE_IMAGE_TAG=0.1.1
+```
+
+Then run:
+
 ```bash
 # 1. Pull the new image
 docker compose pull

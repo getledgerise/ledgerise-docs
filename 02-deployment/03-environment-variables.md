@@ -31,6 +31,7 @@ These variables tune how the services behave at runtime. Defaults are safe for m
 
 | Variable | Default | Description |
 |---|---|---|
+| `LEDGERISE_IMAGE_TAG` | `0.1.0` | Docker image version used by `docker-compose.yml`, for example `0.1.0`. Change this when upgrading to a new Ledgerise release. |
 | `API_PORT` | `3000` | Host port the API service listens on. |
 | `WEB_PORT` | `3001` | Host port the web dashboard service listens on. |
 | `RUN_ENGINE_ON_START` | `false` | If `true`, the worker runs one journal engine cycle immediately when it starts, before falling into its scheduled loop. Useful for local development. |
