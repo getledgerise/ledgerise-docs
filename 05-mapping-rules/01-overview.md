@@ -24,7 +24,7 @@ The page has three parts:
 
 **Rules table** — one row per rule, showing product line, biller, biller category, type filter, debit account, credit account(s), status, version, and last match.
 
-[SCREENSHOT: Mapping Rules page showing the stat bar (Active Rules, Inactive, Unmapped Today) and the rules table with color-coded account code chips]
+![Mapping Rules page overview](../images/mapping-rules-page-overview.png)
 
 ---
 

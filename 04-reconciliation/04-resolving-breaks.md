@@ -12,7 +12,7 @@ Go to **Reconciliation → Breaks** to see all open breaks across all runs.
 
 Breaks are sorted by SLA status first (breached breaks appear at the top), then by age. This ensures the most urgent items are always visible without filtering.
 
-[SCREENSHOT: Breaks tab showing a table of open breaks with break type badges (colour-coded), SLA status column with red/amber/green indicators, age in days, owner column, and a Resolve button on each row]
+![Breaks tab table](../images/breaks-tab-table.png)
 
 ---
 
@@ -76,7 +76,7 @@ Below the evidence:
 - Assignment — who currently owns this break, and the history of ownership
 - A link to view the source transaction on the Transactions page
 
-[SCREENSHOT: Break resolution drawer Step 1 showing the internal record and external record side by side, the computed amount difference, age and SLA indicator, and the footer with Close, Export Evidence Package, and Resolve → buttons]
+![Break resolution drawer step 1](../images/break-resolve-drawer-step1.png)
 
 Click **Resolve →** to advance to Step 2.
 
@@ -97,7 +97,7 @@ The resolution note is a free-text field. Write enough to explain the decision t
 
 Both fields are required. You cannot close a break without both.
 
-[SCREENSHOT: Break resolution drawer Step 2 showing the resolution type dropdown with options listed, the resolution note textarea, and the Similar Breaks panel below with a checklist of related breaks]
+![Break resolution drawer step 2](../images/break-resolve-drawer-step2.png)
 
 ---
 

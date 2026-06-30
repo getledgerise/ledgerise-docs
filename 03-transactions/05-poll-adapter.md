@@ -76,7 +76,7 @@ Set how often the adapter should run using a cron expression:
 
 Choose a frequency that balances how fresh you need your data against the load it places on your source system's API. Every 15 minutes is a good default for most production setups.
 
-[SCREENSHOT: poll-adapter configuration panel showing the API endpoint URL, authentication type dropdown, response field path input, and poll schedule cron field]
+![Poll adapter configuration](../images/poll-adapter-config.png)
 
 ---
 

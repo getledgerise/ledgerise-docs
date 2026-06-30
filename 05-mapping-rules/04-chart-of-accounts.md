@@ -16,7 +16,7 @@ You manage your COA in your accounting system, not in Ledgerise. Add, rename, or
 
 Go to **Settings → COA Reference**. The page lists every account in your imported COA with its code, name, account type (shown with a colour chip), and currency.
 
-[SCREENSHOT: Settings → COA Reference showing the account list with colour-coded type chips — blue for Asset, green for Income, and so on]
+![COA reference list](../images/coa-reference-list.png)
 
 ---
 

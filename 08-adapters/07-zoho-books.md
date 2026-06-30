@@ -22,7 +22,7 @@ Before configuring this adapter, you need:
 3. Click **Authorize**. Ledgerise opens the Zoho OAuth consent screen. Sign in to Zoho and grant access.
 4. After authorisation, Ledgerise stores the access and refresh tokens. The healthcheck status updates to green.
 
-[SCREENSHOT: zoho-books adapter Configure panel showing the Client ID, Client Secret, and Organisation ID input fields, and the Authorize button]
+![Zoho Books configuration panel](../images/zoho-books-config-panel.png)
 
 ---
 

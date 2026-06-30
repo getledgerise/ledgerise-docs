@@ -49,7 +49,7 @@ A report source identifies the counterparty and the type of statement. Its displ
 
 The scope fields are optional but important: they tell Ledgerise which internal transaction records to pull for comparison. A `Paystack — Settlement Report` scoped to the `bill-payment` product line will only compare bill payment transactions — not wallet or lending transactions — against the Paystack file.
 
-[SCREENSHOT: Import Statement drawer showing the report source selection step — a dropdown with existing report sources and an "Add Report Source" option, with Paystack — Settlement Report selected as the example]
+![Import statement source selection](../images/import-drawer-source-select.png)
 
 ---
 
@@ -85,7 +85,7 @@ You also set the date format (e.g. `DD/MM/YYYY`) and whether amounts are in majo
 
 **AI-assisted mapping:** When importing from a new report source, Ledgerise analyses your column headers and a sample of values and proposes a mapping. You confirm or adjust before proceeding.
 
-[SCREENSHOT: Field mapping step in the import drawer showing CSV column names on the left and canonical field dropdowns on the right, with date format and amount unit selectors below]
+![Import statement field mapping](../images/import-drawer-field-mapping.png)
 
 ---
 
@@ -106,7 +106,7 @@ When the run finishes, the UI navigates you to:
 
 The run appears in the **Runs tab** with its match rate, break count, and status. A match rate above 95% is the healthy target for an established integration. A new counterparty or first import typically produces more breaks until your rules and field mappings are refined.
 
-[SCREENSHOT: Breaks tab after a completed import showing a list of open breaks with their type badges and SLA status indicators — some amber, some green]
+![Breaks tab after import](../images/breaks-tab-after-import.png)
 
 ---
 

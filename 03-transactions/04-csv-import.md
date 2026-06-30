@@ -33,7 +33,7 @@ Before importing files, you need to tell the adapter how your CSV columns corres
 6. Configure the **amount format** — specify whether amounts in your file are in the smallest currency unit (kobo, cents) or in the major unit (naira, dollars). If your file uses major units, the adapter multiplies by 100 before storing.
 7. Save the mapping. Ledgerise saves this column mapping for reuse so you do not need to remap on every import.
 
-[SCREENSHOT: csv-import configuration panel showing the column mapping step with source column headers on the left and canonical field dropdowns on the right, with a date format selector at the bottom]
+![CSV column mapping](../images/csv-column-mapping.png)
 
 ---
 
@@ -56,7 +56,7 @@ Before committing the import, Ledgerise shows a preview screen with:
 - The number of rows that passed validation.
 - Any rows that failed validation, with the column and error for each.
 
-[SCREENSHOT: Import preview screen showing a summary line (e.g. "248 rows — 243 valid, 5 errors") and a list of validation errors below with row numbers and field names]
+![CSV import preview](../images/csv-import-preview.png)
 
 Common validation errors include:
 

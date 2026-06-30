@@ -42,7 +42,7 @@ All reconciliation events from `recon_audit_log` during the period.
 3. Click **Generate Report →**.
 4. The report viewer opens at `reports.html` and renders the scoped report.
 
-[SCREENSHOT: Generate Report drawer showing the four mode tabs — By Date selected — with period chips (Today, This Week, This Month, Custom Range) visible and This Month highlighted]
+![Generate report drawer by date](../images/generate-report-drawer-date.png)
 
 ---
 
@@ -85,7 +85,7 @@ Example prompts:
 
 Example chips below the input pre-fill common queries. The AI interprets your description and generates the appropriate scope.
 
-[SCREENSHOT: Natural Language mode in the Generate Report drawer showing the text input with the AI badge and several example prompt chips below: "Breaks from last week", "Fee mismatches in January", "GTBank runs below 95%"]
+![Generate report drawer natural language mode](../images/generate-report-drawer-nl.png)
 
 ---
 
@@ -100,7 +100,7 @@ After clicking Generate Report, the viewer opens and renders the report as a pag
 
 A CSV data export is always generated alongside the PDF and is also available from the toolbar. The CSV contains the match detail and break detail tables in a machine-readable format for further analysis or import into other tools.
 
-[SCREENSHOT: Report viewer showing a reconciliation report with a match rate stat grid at the top (9,847 matched of 9,872 total — 99.7%), followed by a break analysis section and a fee analysis section]
+![Reconciliation report viewer](../images/report-viewer.png)
 
 ---
 

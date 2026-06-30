@@ -40,7 +40,7 @@ The webhook adapter receives JSON payloads pushed by your source system or payme
 
 → Full guide: [webhook adapter](03-webhook-adapter.md)
 
-[SCREENSHOT: Settings → Adapters showing the inbound adapter tiles (webhook, csv-import, poll) with their healthcheck status badges and last-run timestamps]
+![Inbound adapter tiles](../images/adapters-inbound-tiles.png)
 
 ---
 

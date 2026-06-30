@@ -48,7 +48,7 @@ After 5 failed attempts, the entry is marked `retry_exhausted` and automatic ret
 
 Read the error message before retrying. Retrying without fixing the root cause will fail again immediately.
 
-[SCREENSHOT: Journal entry detail drawer showing the posting history timeline with two failed attempts, the error message from the accounting system, and the retry button]
+![Failed journal entry drawer](../images/journal-entry-failed-drawer.png)
 
 ---
 
@@ -87,7 +87,7 @@ Fix:
 
 You can retry one entry at a time from the table row, or open the detail drawer and use the **Retry** button there.
 
-[SCREENSHOT: Journal Log filtered to retry-exhausted status showing the red badge and Retry action button on a row]
+![Retry exhausted Journal Log filter](../images/journal-log-retry-exhausted.png)
 
 ---
 

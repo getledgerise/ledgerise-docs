@@ -15,7 +15,7 @@ To export a filtered slice of the Journal Log:
 
 Apply filters before exporting. Without filters, the export includes all entries in the log, which can be large for high-volume operators.
 
-[SCREENSHOT: Journal Log with filters applied (date range and status) and the Export CSV button visible in the page header]
+![Journal Log export button](../images/journal-log-export-button.png)
 
 ---
 

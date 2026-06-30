@@ -47,7 +47,7 @@ docker compose exec db pg_dump \
   > "/backups/ledgerise-$(date +%Y%m%d-%H%M%S).dump"
 ```
 
-[SCREENSHOT: Terminal showing a pg_dump command completing successfully with the output file path and size]
+![pg_dump backup terminal output](../images/pg-dump-terminal.png)
 
 ---
 

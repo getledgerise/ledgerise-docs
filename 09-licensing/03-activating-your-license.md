@@ -44,7 +44,7 @@ Keep both keys somewhere safe before closing the retrieval page. If you lose the
 4. Enter the **license public key** in the second field.
 5. Click **Activate License**.
 
-[SCREENSHOT: Settings → System showing the License section with the license key and public key input fields before activation]
+![License key input fields](../images/license-key-input.png)
 
 ---
 
@@ -76,7 +76,7 @@ Look for:
 
 If `environment_mode` still reads `"sandbox"`, the license was not applied. Double-check that you entered both keys exactly as they appeared on the retrieval page — no leading or trailing spaces.
 
-[SCREENSHOT: Settings → System after successful activation showing Production License status and the environment mode indicator]
+![Production license status](../images/system-production-license.png)
 
 ---
 

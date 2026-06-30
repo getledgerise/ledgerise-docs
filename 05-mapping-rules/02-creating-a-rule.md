@@ -38,9 +38,9 @@ The drawer opens on the right. The rules table stays visible behind it, so you c
 
 Click **Browse COA** at any account field to open a modal showing your full chart of accounts with colour-coded type chips, if you need to look up a code rather than search for it.
 
-[SCREENSHOT: Add Rule drawer showing all fields completed for an electricity bill payment rule — product line "bill-payment", biller "ikeja-electric", debit account, and two credit account rows with percentages]
+![Completed Add Rule drawer](../images/add-rule-drawer-completed.png)
 
-[SCREENSHOT: Browse COA modal opened from the debit account field, showing the full account list with colour-coded type chips]
+![Browse COA modal](../images/browse-coa-modal.png)
 
 ---
 
@@ -48,7 +48,7 @@ Click **Browse COA** at any account field to open a modal showing your full char
 
 Use more than one credit account when revenue needs to be divided — for example, 80% to your revenue account and 20% to a partner settlement account. Add a row for each account and set its percentage. Ledgerise will not let you save the rule unless the percentages sum to exactly 100.
 
-[SCREENSHOT: Credit accounts section showing two rows with account picker and percentage inputs summing to 100]
+![Split credit accounts](../images/split-credit-accounts.png)
 
 ---
 

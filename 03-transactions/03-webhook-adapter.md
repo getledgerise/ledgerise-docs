@@ -61,7 +61,7 @@ You would map:
 
 The field mapping UI presents your source field names on the left and canonical field names on the right. You drag or select the mapping for each required field.
 
-[SCREENSHOT: Settings → Adapters → webhook-adapter configuration panel showing the endpoint URL, signing secret field, and the field mapping form with source fields on the left mapped to canonical fields on the right]
+![Webhook adapter configuration](../images/webhook-adapter-config.png)
 
 ---
 
@@ -93,7 +93,7 @@ curl -X POST https://api.your-domain.com/webhooks/inbound \
 
 Go to **Transactions** and look for your test record. It should appear with a posting status of `unposted`.
 
-[SCREENSHOT: Transactions page showing a newly ingested webhook transaction with source reference TEST-001, status completed, and posting status unposted]
+![Webhook transaction ingested](../images/transactions-webhook-ingested.png)
 
 ---
 

@@ -54,7 +54,7 @@ Each row in the Audit Log shows:
 | Target | The ID of the object affected — a rule ID, transaction ID, break ID, user ID, and so on |
 | Summary | A human-readable description of what changed |
 
-[SCREENSHOT: Settings → Audit Log showing several event rows with event type, actor name, target ID, and timestamp columns, and the filter bar at the top]
+![Audit Log page](../images/audit-log-page.png)
 
 ---
 

@@ -14,7 +14,7 @@ Only **Admins** can invite users, change roles, and deactivate accounts. Finance
 
 The page shows all user accounts in your deployment with columns for name, email, role, last login, and status (active or deactivated).
 
-[SCREENSHOT: Settings → Users showing the user list with name, email, role badges, last login timestamps, and the Invite User button in the page header]
+![Settings users list](../images/settings-users-list.png)
 
 ---
 
@@ -50,7 +50,7 @@ The invited user appears in the list immediately with status `pending` until the
 2. Select a new role from the role picker modal.
 3. Confirm. The change takes effect immediately on the user's next page load — their active session is not invalidated.
 
-[SCREENSHOT: Role picker modal showing the three role options (Admin, Finance, Auditor) with short descriptions of each]
+![Role picker modal](../images/role-picker-modal.png)
 
 ---
 

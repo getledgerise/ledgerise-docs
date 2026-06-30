@@ -96,6 +96,6 @@ Once activated, there is no path back to sandbox mode without a fresh deployment
 
 → Full checklist: [sandbox to production](../02-deployment/05-sandbox-to-production.md)
 
-[SCREENSHOT: Settings → System showing the engine schedule, batch size, and suspense account code fields]
+![System settings engine fields](../images/system-settings-engine.png)
 
-[SCREENSHOT: Settings → System showing the License section with the license key and public key input fields before activation]
+![License key input fields](../images/license-key-input.png)

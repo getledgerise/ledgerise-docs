@@ -10,7 +10,7 @@ Rules are separate from the mapping rules on the Mapping Rules page. Reconciliat
 
 Go to **Reconciliation → Rules tab**. Rules are organised by report source — each counterparty and statement type has its own independent rule set. Within each report source, rules are grouped into nine categories.
 
-[SCREENSHOT: Reconciliation → Rules tab showing two report source sections — "Paystack — Settlement Report" and "GTBank — Collection Account Statement" — each expanded to show their rule categories with rule count badges and version indicators]
+![Reconciliation rules tab overview](../images/recon-rules-tab-overview.png)
 
 ---
 
@@ -100,7 +100,7 @@ When a fee mismatch break is resolved with `fee_schedule_updated`, update the fe
 
 Adding a new fee schedule version does not delete the old one. The old schedule retains its `effective_to` date, and the engine uses the schedule version that was active on the transaction's `occurred_at` date. This ensures historical match computations remain reproducible even after a schedule change.
 
-[SCREENSHOT: Fee Schedule section in the Rules tab showing an active fee schedule card for "Paystack — Settlement Report" with tier summary text: "Card: 1.5% + ₦100, cap ₦2,000 · Bank transfer: ₦50 flat" and an Edit button]
+![Reconciliation fee schedule card](../images/recon-rules-fee-schedule-card.png)
 
 ---
 
@@ -144,7 +144,7 @@ Common auto-resolve rules:
 4. Click **Save Draft** to save without activating — the rule is stored but not applied by the engine. This is useful when you want to review a rule before it affects the next run.
 5. Click **Publish** when the rule is ready. A new version is created and the rule becomes active.
 
-[SCREENSHOT: Add/Edit Rule drawer showing the category dropdown set to "Fee Schedule", with the fee type, percentage, flat amount, and cap amount fields visible below]
+![Reconciliation rule add edit drawer](../images/recon-rules-add-edit-drawer.png)
 
 ---
 
@@ -156,7 +156,7 @@ Click **Edit** on any rule card and expand the **Version History** section at th
 
 Reconciliation runs always record which rule versions were active at the time the run was executed. If a rule changes after a run, the original run's results are unaffected and remain reproducible.
 
-[SCREENSHOT: Version History section in a rule edit drawer showing a timeline: "v2.1 — Published by Kemi Adeyemi, 15 Jan 2026, 14:32" (Current badge) and "v2.0 — Published by Emeka Okafor, 02 Dec 2025, 09:15" below it]
+![Reconciliation rule version history](../images/recon-rules-version-history.png)
 
 ---
 

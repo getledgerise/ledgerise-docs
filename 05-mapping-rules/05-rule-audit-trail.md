@@ -25,7 +25,7 @@ This happens automatically — there is no separate step to "enable" auditing on
 
 You'll see a timeline of every version the rule has ever had, most recent first, with the user attribution and change date for each.
 
-[SCREENSHOT: Rule detail drawer showing the Version History timeline with version numbers, user attribution, and dates]
+![Rule version history](../images/rule-version-history.png)
 
 ---
 

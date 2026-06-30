@@ -91,7 +91,7 @@ docker compose ps
 
 All three should show `Up` in the status column.
 
-[SCREENSHOT: Terminal showing `docker compose ps` output with `api`, `web`, and `worker` all in `Up` state]
+![Docker Compose services running](../images/docker-compose-ps.png)
 
 ---
 
@@ -115,7 +115,7 @@ If `repository` shows `"memory"` instead of `"postgres"`, the API is not reading
 
 Open the dashboard URL in your browser (`http://your-server:3001` or your configured domain). You should see the Ledgerise login screen.
 
-[SCREENSHOT: Browser showing the `/healthcheck` JSON response with `"repository":"postgres"` and `"db":"ok"`]
+![Healthcheck response](../images/healthcheck-response.png)
 
 ---
 

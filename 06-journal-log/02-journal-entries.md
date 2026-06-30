@@ -34,7 +34,7 @@ Click any row in the Journal Log to open the detail drawer. It shows:
 
 **Export Evidence Package** — generates a timestamped, tamper-evident document containing the canonical transaction record, this journal entry, the mapping rule version, the full posting history, and any reconciliation or flag records. → See [evidence packages](../04-reconciliation/07-evidence-packages.md)
 
-[SCREENSHOT: Journal entry detail drawer showing the double-entry lines with debit and credit amounts, the source transaction section, the mapping rule version note, and the posting history timeline]
+![Journal entry detail drawer](../images/journal-entry-detail-drawer.png)
 
 ---
 

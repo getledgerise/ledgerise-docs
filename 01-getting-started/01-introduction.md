@@ -29,7 +29,7 @@ Transactions in  →  Reconciliation  →  Classification  →  Journal entries 
 3. **Classification** — your mapping rules tell Ledgerise which accounting accounts to debit and credit for each transaction type.
 4. **Journal entries out** — Ledgerise posts the completed entries to your accounting system (such as Zoho Books) or exports them as a CSV you can import manually.
 
-[SCREENSHOT: Ledgerise dashboard showing the top navigation bar with Transactions, Reconciliation, Mapping Rules, Journal Log, and Settings tabs]
+![Ledgerise dashboard navigation overview](../images/nav-bar-overview.png)
 
 ---
 

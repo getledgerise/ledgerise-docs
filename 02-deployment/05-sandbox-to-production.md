@@ -92,14 +92,14 @@ What is **not** cleared:
 3. Enter your **commercial license key** and **public key** (provided by Ledgerise during onboarding).
 4. Click **Activate License**.
 
-[SCREENSHOT: Settings → System showing the license key and public key input fields before activation]
+![License key input fields](../images/license-key-input.png)
 
 After activation:
 - The Sandbox badge disappears from the top navigation bar.
 - Settings → System shows **Production License** with your license tier and usage limits.
 - The `/healthcheck` endpoint returns `"environment_mode": "production"`.
 
-[SCREENSHOT: Settings → System after activation showing Production License status with no Sandbox badge in the navigation bar]
+![Production license status](../images/system-production-license.png)
 
 ---
 

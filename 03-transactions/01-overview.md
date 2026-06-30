@@ -8,7 +8,7 @@ The Transactions page is the default landing page in Ledgerise. It shows every t
 
 Every transaction that enters Ledgerise — whether it arrived via webhook, CSV upload, or scheduled poll — appears here in a consistent format. The page lets you see what has been ingested, what has been posted, and what needs your attention.
 
-[SCREENSHOT: Transactions page with the stat bar at top, filter bar, and transaction table showing a mix of posted, unmapped, and pending rows with colour-coded posting status badges]
+![Transactions page overview](../images/transactions-page-overview.png)
 
 ---
 

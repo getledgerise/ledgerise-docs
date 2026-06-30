@@ -27,7 +27,7 @@ The suspense account is a safety net. No transaction is ever silently dropped or
 
 **From the exceptions badge** — the Exceptions badge in the top navigation bar aggregates all open issues, including unmapped transactions. Clicking it shows a filtered view.
 
-[SCREENSHOT: Transactions page filtered to "Unmapped only" showing amber posting status badges on each row, with an "Assign Rule" action button visible on a highlighted row]
+![Unmapped transactions filter](../images/transactions-unmapped-filter.png)
 
 ---
 

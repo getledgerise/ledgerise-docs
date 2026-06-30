@@ -28,7 +28,7 @@ The **Export Evidence Package** button appears in the detail drawer for:
 - **A match record** — Reconciliation → Matches → click any row → Export Evidence Package.
 - **A transaction** — Transactions page → click any row → Export Evidence Package (in the transaction detail drawer footer).
 
-[SCREENSHOT: Break resolution drawer Step 1 showing the footer with three buttons: "Close" on the left, "Export Evidence Package" in the centre, and "Resolve →" on the right]
+![Break resolution drawer evidence package action](../images/break-resolve-drawer-step1.png)
 
 ---
 
@@ -47,7 +47,7 @@ The document has eight sections:
 7. **Notes and evidence** — all resolution notes, manual match notes, escalation notes, and any attached reference documents
 8. **Footer** — digital signature block with document ID and generation timestamp
 
-[SCREENSHOT: Evidence package PDF in the report viewer showing Section 1 (header with document ID LR-EVP-20260615-003847 and generation timestamp) and Section 3 (break result showing the internal and external records side by side with the computed amount difference)]
+![Evidence package PDF](../images/evidence-package-pdf.png)
 
 ---
 

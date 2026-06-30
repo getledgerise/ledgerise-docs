@@ -31,7 +31,7 @@ Any System      ──►   (normalize)         statements)        (map + post) 
 
 Reconciliation does not have to block posting — a configurable posting gate (default `disabled`) determines whether journal entries wait on reconciliation status. With the default setting, the engine posts from completed transactions regardless of reconciliation status, and reconciliation runs as an independent verification process.
 
-[SCREENSHOT: Ledgerise system architecture diagram showing inbound adapters on the left feeding into the reconciliation stage, then the journal engine, which sends output to outbound adapters on the right, with the internal database shown below]
+![Ledgerise architecture diagram](../images/architecture-diagram.png)
 
 ---
 

@@ -52,7 +52,7 @@ Go to **Settings → Adapters → csv-import → Configure**.
 
 → Full step-by-step: [importing transactions](../03-transactions/04-csv-import.md)
 
-[SCREENSHOT: CSV import flow showing the column mapping step with dropdown pickers for each canonical field against a preview of the uploaded file]
+![CSV column mapping](../images/csv-column-mapping.png)
 
 ---
 

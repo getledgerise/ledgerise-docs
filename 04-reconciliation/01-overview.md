@@ -67,7 +67,7 @@ The stat bar at the top persists across all tabs:
 | **SLA Breached** | Breaks that have exceeded their resolution deadline — red if any exist |
 | **Last Run** | Timestamp and source of the most recent completed run |
 
-[SCREENSHOT: Reconciliation page showing the stat bar with Matched, Breaks, Pending, SLA Breached, and Last Run stats, and the four tabs: Runs, Matches, Breaks, Rules]
+![Reconciliation page overview](../images/reconciliation-page-overview.png)
 
 ---
 

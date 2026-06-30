@@ -22,11 +22,11 @@ Every fresh Ledgerise deployment creates a single default admin account on first
 - **Email:** `admin@ledgerise.dev`
 - **Password:** `password`
 
-[SCREENSHOT: Ledgerise login screen showing the email and password fields, before sign-in]
+![Ledgerise login screen](../images/login-screen.png)
 
 After signing in, you should see the Ledgerise dashboard. Look for the **Sandbox** badge in the top navigation bar.
 
-[SCREENSHOT: Ledgerise dashboard after first login showing the Sandbox badge in the top navigation bar and the Transactions page as the default landing view]
+![Sandbox dashboard after first login](../images/dashboard-sandbox-badge.png)
 
 ---
 

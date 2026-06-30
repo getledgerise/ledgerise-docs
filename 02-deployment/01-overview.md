@@ -70,4 +70,4 @@ Once you are satisfied with your setup, you activate your commercial license in 
 - [Environment variables](03-environment-variables.md) — complete reference for all configuration options
 - [First login](04-first-login.md) — what to do immediately after deployment
 
-[SCREENSHOT: Terminal output of `docker compose ps` showing `api`, `web`, and `worker` services all in `Up` state]
+![Docker Compose services running](../images/docker-compose-ps.png)

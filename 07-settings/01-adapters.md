@@ -26,7 +26,7 @@ The page shows all registered adapters, grouped into inbound (data coming in) an
 
 If a healthcheck fails, an error notice appears under the adapter row with the error code and message. Resolve the underlying issue — usually a credential problem or network connectivity — before re-enabling the adapter.
 
-[SCREENSHOT: Settings → Adapters showing the adapter list with healthcheck status indicators (green OK / red error), last run timestamps, and the Configure button for each adapter]
+![Settings adapters list](../images/settings-adapters-list.png)
 
 ---
 

@@ -8,7 +8,7 @@ A match record is a confirmed pair between an internal Ledgerise transaction and
 
 Go to **Reconciliation → Matches** to view all confirmed match records across all runs.
 
-[SCREENSHOT: Matches tab showing a table of confirmed match pairs with columns for Source ID, External Reference, Internal Amount, External Amount, Match Confidence, Matched On, and Report Source — with a filter bar above and a match confidence badge visible on each row]
+![Matches tab table](../images/matches-tab-table.png)
 
 ---
 
@@ -65,7 +65,7 @@ Below the side-by-side view:
 - A link to the full transaction detail on the Transactions page
 - An **Export Evidence Package** button — generates a timestamped PDF document for this match
 
-[SCREENSHOT: Match detail drawer showing the internal and external records side by side with the match confidence badge, matched-on field, and the Export Evidence Package button in the drawer footer]
+![Match detail drawer](../images/match-detail-drawer.png)
 
 ---
 

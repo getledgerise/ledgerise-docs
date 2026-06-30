@@ -19,7 +19,7 @@ The page has two parts:
 
 **Entries table** — one row per journal entry, with columns for Journal ID, Transaction ID, date, type, amount, product line, biller, debit account, credit account(s), status, and actions.
 
-[SCREENSHOT: Journal Log page showing the stat bar with today's Posted, Failed, Unmapped counts and Last Engine Run timestamp, and the entries table below]
+![Journal Log overview](../images/journal-log-overview.png)
 
 ---
 

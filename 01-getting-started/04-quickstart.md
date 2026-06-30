@@ -34,7 +34,7 @@ You should see the Ledgerise dashboard with a **Sandbox** badge in the top navig
 
 > Before going live, you will invite your team members and change the default admin credentials. The default account is for sandbox setup only.
 
-[SCREENSHOT: Ledgerise dashboard after first login showing the Sandbox badge in the top navigation bar and the Transactions page as the default landing view]
+![Sandbox dashboard after first login](../images/dashboard-sandbox-badge.png)
 
 ---
 
@@ -51,7 +51,7 @@ If you are not yet ready to connect your accounting system, use the `journal-csv
 
 → Full instructions: [zoho-books adapter](../08-adapters/07-zoho-books.md) | [journal csv export](../08-adapters/08-journal-csv-export.md)
 
-[SCREENSHOT: Settings > Adapters showing the zoho-books adapter tile with a green healthcheck status badge after successful configuration]
+![Zoho Books adapter healthcheck](../images/adapters-zoho-healthcheck.png)
 
 ---
 
@@ -113,7 +113,7 @@ Repeat for each product line and biller your platform handles.
 
 → Full instructions: [creating a rule](../05-mapping-rules/02-creating-a-rule.md) | [rule resolution order](../05-mapping-rules/03-rule-resolution-order.md)
 
-[SCREENSHOT: Mapping Rules page showing several completed rules with colour-coded account code chips (blue for asset, green for income), and the Add Rule button at top right]
+![Completed mapping rules](../images/mapping-rules-completed.png)
 
 ---
 
@@ -165,7 +165,7 @@ Here is what each outcome means and what to do:
 
 → Full instructions: [retrying failed entries](../06-journal-log/03-retrying-failed-entries.md)
 
-[SCREENSHOT: Journal Log after the first engine run showing a mix of green posted and amber unmapped entries, with the Run Engine Now button visible in the page header]
+![Journal Log after the first engine run](../images/journal-log-first-run.png)
 
 ---
 
@@ -194,7 +194,7 @@ When you are satisfied that transactions are flowing in and journal entries are 
 
 → Full checklist: [sandbox to production](../02-deployment/05-sandbox-to-production.md)
 
-[SCREENSHOT: Settings > System after production activation showing the Production License status indicator and no Sandbox badge in the top navigation bar]
+![Production license status](../images/system-production-license.png)
 
 ---
 
