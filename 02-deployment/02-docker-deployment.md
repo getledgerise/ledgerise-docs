@@ -207,7 +207,7 @@ The dashboard should load with a **Sandbox** badge in the top navigation bar. If
 
 → What to do next: [first login](04-first-login.md)
 
-After first login, activate production from Settings → System using your Ledgerise license key. You do not need a license key in `.env`.
+After first login, activate your license from Settings → System using your Ledgerise license key. You do not need a license key in `.env`.
 
 ---
 

@@ -92,7 +92,7 @@ What is **not** cleared:
 3. Enter your **commercial license key** (provided by Ledgerise during onboarding).
 4. Click **Activate License**.
 
-![License key input fields](../images/license-key-input.png)
+![License key input](../images/license-key-input.png)
 
 After activation:
 - The Sandbox badge disappears from the top navigation bar.
@@ -111,7 +111,7 @@ Before starting real data imports, verify the activation:
 curl http://localhost:3000/healthcheck
 ```
 
-Look for `"environment_mode": "production"` in the response. If you still see `"environment_mode": "sandbox"`, the license was not applied correctly. Check that the license key matches exactly what Ledgerise provided and that the deployment can reach Ledgerise Admin for activation.
+Look for `"environment_mode": "production"` in the response. If you still see `"environment_mode": "sandbox"`, the license was not applied correctly. Check that the license key matches exactly what Ledgerise provided and that the deployment can reach Ledgerise for activation.
 
 ---
 

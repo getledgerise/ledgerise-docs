@@ -85,7 +85,7 @@ Do this once, just before activating your commercial license, to start productio
 
 ## license and production activation
 
-Enter your **commercial license key** (provided by Ledgerise during onboarding) in the License section at the bottom of Settings → System. Click **Activate License**. Ledgerise verifies the key with Ledgerise Admin before production mode is enabled.
+Enter your **commercial license key** (provided by Ledgerise during onboarding) in the License section at the bottom of Settings → System. Click **Activate License**. Ledgerise verifies the key before production mode is enabled.
 
 After activation:
 - The Sandbox badge disappears from the top navigation bar.
@@ -98,4 +98,4 @@ Once activated, there is no path back to sandbox mode without a fresh deployment
 
 ![System settings engine fields](../images/system-settings-engine.png)
 
-![License key input fields](../images/license-key-input.png)
+![License key input](../images/license-key-input.png)

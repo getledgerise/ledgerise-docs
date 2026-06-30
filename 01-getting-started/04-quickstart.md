@@ -188,7 +188,7 @@ When you are satisfied that transactions are flowing in and journal entries are 
 
 1. **Configure your suspense account code** in Settings → System. This is the COA account where unmapped transactions will land.
 2. **Reset sandbox data** in Settings → System → Reset sandbox data. This clears all demo transactions, journal entries, reconciliation runs, and related records — leaving your adapter configuration, mapping rules, and users intact.
-3. **Activate your commercial license** in Settings → System. Enter your license key. The Sandbox badge disappears and the status reads **Production License** after Ledgerise Admin approves the activation.
+3. **Activate your commercial license** in Settings → System. Enter your license key. The Sandbox badge disappears and the status reads **Production License** after Ledgerise verifies the activation.
 4. **Verify the activation** by visiting `/healthcheck`. It should return `environment_mode: "production"`.
 5. Start your real data imports or live webhook connections.
 
