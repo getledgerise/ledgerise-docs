@@ -16,7 +16,7 @@ These four variables must be set before the application can start. Missing any o
 
 | Variable | Description |
 |---|---|
-| `DATABASE_URL` | PostgreSQL connection string. Format: `postgresql://user:password@host:5432/dbname`. The API and worker both connect to this database. |
+| `DATABASE_URL` | PostgreSQL connection string. Format: `postgresql://user:password@your-db-host:5432/dbname`. The API and worker both connect to this database from inside Docker. Do not use `localhost` or `127.0.0.1` unless PostgreSQL is running in the same container. |
 | `AUTH_TOKEN_SECRET` | Secret used to sign and verify dashboard session tokens. Must be a strong random value. Generate one with `openssl rand -hex 64`. Rotate this value to invalidate all active sessions. |
 | `LEDGERISE_CREDENTIALS_KEY` | AES-256-GCM encryption key for adapter credentials (API keys, OAuth tokens) and AI provider keys stored in the database. Must be a 64-character hex string. Generate one with `openssl rand -hex 32`. **This value cannot be changed after credentials have been stored without re-encrypting the existing data.** |
 | `LEDGERISE_DOMAIN` | Hostname where users open Ledgerise, without `https://` and without a path — for example, `ledgerise.your-domain.com`. The Docker web service uses this to serve browser runtime config through `/runtime-config.js`. |

@@ -177,12 +177,14 @@ Four variables are required before the application can start:
 
 | Variable | What to set |
 |---|---|
-| `DATABASE_URL` | Your PostgreSQL connection string, e.g. `postgresql://ledgerise:password@host:5432/ledgerise` |
+| `DATABASE_URL` | Your PostgreSQL connection string, e.g. `postgresql://ledgerise:password@your-db-host:5432/ledgerise` |
 | `AUTH_TOKEN_SECRET` | A strong random secret for signing session tokens. Generate one: `openssl rand -hex 64` |
 | `LEDGERISE_CREDENTIALS_KEY` | A 64-character hex key for encrypting adapter credentials. Generate one: `openssl rand -hex 32` |
 | `LEDGERISE_DOMAIN` | Hostname only, without `https://` and without a path, e.g. `ledgerise.your-domain.com` |
 
 `LEDGERISE_PROXY_PORT` defaults to `18080`. Change it only if another local service already uses that port.
+
+Do not use `localhost` or `127.0.0.1` as the database host in `DATABASE_URL` for Docker deployments. Inside a Docker container, `localhost` means the container itself, not the VPS or database server. Use a hostname or IP address reachable from Docker, such as a managed database hostname, a private network IP, or the Docker service name if PostgreSQL runs in the same Compose network.
 
 → Full reference: [environment variables](03-environment-variables.md)
 
@@ -357,7 +359,7 @@ If the local check works but the public hostname fails, the problem is in DNS, H
 
 ### api shows `"repository":"memory"` in healthcheck
 
-The API is not receiving `DATABASE_URL`. Check that the variable is correctly set in your `.env` file and that the Compose file is reading from that file. Restart the API service after fixing the value:
+The API is not receiving `DATABASE_URL`, or `DATABASE_URL` points to a database host that the Docker container cannot reach. Do not use `localhost` or `127.0.0.1` for the database host unless PostgreSQL is running inside the same container, which is not the standard Ledgerise deployment. Use a reachable database hostname, private IP, or Compose service name. Restart the API service after fixing the value:
 
 ```bash
 docker compose restart api
