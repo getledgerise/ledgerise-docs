@@ -217,7 +217,19 @@ This applies all pending SQL migrations to your database and records them in `sc
 
 ---
 
-## step 4 — start the services
+## step 4 — seed required built-in records
+
+Fresh databases also need the built-in operator, adapter catalog, and default chart of accounts before the API can start. Run the seed command after migrations:
+
+```bash
+docker compose --profile tools run --rm api npm run seed:local
+```
+
+Run the seed command for fresh databases during initial setup. Do not use it as a routine upgrade step after operators have customized the default chart of accounts or built-in adapter metadata.
+
+---
+
+## step 5 — start the services
 
 ```bash
 docker compose up -d caddy api web worker

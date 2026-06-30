@@ -75,10 +75,11 @@ After resetting, activate your commercial license on the same screen.
 
 ## if you cannot sign in
 
-**First login fails immediately:** Migrations may not have completed. Verify that you ran migrations before starting the API, then restart the API service:
+**First login fails immediately on a fresh install:** Migrations or required built-in records may not have completed. Verify that you ran migrations and the fresh-database seed command before starting the API, then restart the API service:
 
 ```bash
 docker compose --profile tools run --rm migrate
+docker compose --profile tools run --rm api npm run seed:local
 docker compose restart api
 ```
 

@@ -40,7 +40,7 @@ The Ledgerise deployment runs four services:
 
 The application services share a single PostgreSQL database. They are stateless — the database is the source of truth for everything. This means you can restart any service at any time without data loss.
 
-There is also a `migrate` tool service (Docker only) that applies database migrations. Migrations must run before the application starts, and again on every upgrade.
+There is also a `migrate` tool service (Docker only) that applies database migrations, and a seed command that initializes required built-in records for fresh databases. Migrations must run before the application starts, and again on every upgrade.
 
 ---
 
