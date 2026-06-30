@@ -33,7 +33,6 @@ These variables tune how the services behave at runtime. Defaults are safe for m
 |---|---|---|
 | `API_PORT` | `3000` | Host port the API service listens on. |
 | `WEB_PORT` | `3001` | Host port the web dashboard service listens on. |
-| `VITE_API_BASE_URL` | `PUBLIC_API_BASE_URL` fallback, then `http://localhost:3000` | Legacy/source-build fallback for non-Docker builds. Docker deployments should set `PUBLIC_API_BASE_URL`. |
 | `RUN_ENGINE_ON_START` | `false` | If `true`, the worker runs one journal engine cycle immediately when it starts, before falling into its scheduled loop. Useful for local development. |
 | `RUN_GENERIC_POLL_ON_START` | `false` | If `true`, the worker triggers one poll adapter cycle on startup. |
 | `RUN_GENERIC_POLL_SCHEDULE` | `false` | If `true`, the worker keeps a recurring poll scheduler running. Set this if you are using the poll inbound adapter. |
