@@ -130,7 +130,7 @@ A configurable rule that controls whether journal entries are submitted to the a
 ---
 
 **Posting status**
-The state of a journal entry with respect to submission to the accounting system. Values: `unposted` (waiting for the next engine run), `posted` (successfully submitted), `failed` (submission attempt failed), `duplicate` (skipped because the `source_id` was already posted), `pending_reconciliation` (held by the posting gate).
+The state of a transaction or journal entry with respect to journal generation and accounting system delivery. Values: `unposted` (transaction exists in Ledgerise, waiting for the next engine run — no journal entry yet), `generated` (journal entry created, not yet submitted), `posting` (submission in progress — brief transient state), `posted` (successfully submitted to the accounting system), `failed` (submission attempted but the accounting system returned an error — retrying automatically), `unmapped` (no matching mapping rule found — posted to the suspense account), `retry_exhausted` (all retry attempts failed — manual action required).
 
 ---
 

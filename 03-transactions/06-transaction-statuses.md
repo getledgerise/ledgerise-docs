@@ -28,7 +28,7 @@ These two statuses are independent. A `completed` transaction (the payment settl
 
 If a transaction that has already been posted (`posting_status: posted`) later arrives with status `reversed`, Ledgerise generates a **reversal journal entry** — the same accounts and amounts as the original, but with debits and credits swapped, dated to the reversal timestamp.
 
-If the original was not yet posted when the reversal arrived, it is simply cancelled (`posting_status: cancelled`). No entry is ever created for a transaction that was reversed before posting.
+If the original was not yet posted when the reversal arrived, no journal entry is created. The transaction's status is updated to `reversed` and the journal engine will not pick it up — only `completed` transactions are eligible for posting.
 
 ---
 
@@ -36,13 +36,13 @@ If the original was not yet posted when the reversal arrived, it is simply cance
 
 | Status | Colour | What it means | What to do |
 |---|---|---|---|
-| `unposted` | Grey | Waiting for the next engine run. The transaction is eligible but has not been processed yet. | Nothing. The engine will pick it up on the next scheduled run, or you can trigger a run manually from Journal Log. |
+| `unposted` | Grey | Waiting for the next engine run. No journal entry exists yet. | Nothing. The engine will pick it up on the next scheduled run, or you can trigger a run manually from Journal Log. |
+| `generated` | Grey | Journal entry has been created and is about to be submitted. Brief transient state — you would only see this during an active engine run. | Nothing. This transitions to `posting` and then `posted` within the same run. |
+| `posting` | Grey | Submission to the accounting system is in progress. Brief transient state. | Nothing. |
 | `posted` | Green | A journal entry was created and successfully submitted to your accounting system. | Nothing. This is the successful end state. |
 | `unmapped` | Amber | The engine ran but could not find a matching mapping rule for this transaction's product line and biller. The transaction was posted to the suspense account. | Create a mapping rule for this product line and biller, then the engine will re-evaluate on the next run. → [unmapped transactions](07-unmapped-transactions.md) |
 | `failed` | Red | The engine generated a journal entry and submitted it, but the accounting system returned an error. Ledgerise is retrying automatically. | Check the error in the detail drawer → posting history. Fix the root cause (e.g., an invalid account code) then retry manually if needed. → [retrying failed entries](../06-journal-log/03-retrying-failed-entries.md) |
 | `retry_exhausted` | Red | The posting was attempted five times and failed each time. Automatic retries have stopped. | Open the detail drawer, read the error, fix the root cause, and click **Retry** manually. The entry will not re-enter the automatic retry queue. |
-| `duplicate` | Grey | A record with the same `source_id` has already been posted. This record was skipped. | No action needed. This is the deduplication mechanism working correctly. Investigate if you see unexpected duplicates. |
-| `cancelled` | Grey | The source transaction was reversed before a journal entry was posted. No entry will ever be created for this record. | No action needed. |
 
 ---
 
@@ -75,7 +75,7 @@ Here is how to interpret the two statuses together for the most common combinati
 | `completed` | `retry_exhausted` | Transaction settled, all retries failed — manual intervention required |
 | `failed` | `unposted` | Payment failed in source system — stored for audit trail, will never be posted |
 | `reversed` | `posted` | Reversal triggered a mirror journal entry — both the original and the reversal are in the books |
-| `reversed` | `cancelled` | Transaction reversed before it was posted — no entries exist for this record |
+| `reversed` | `unposted` | Transaction reversed before a journal entry was ever created — the engine will not pick it up, since only `completed` transactions are eligible |
 | `pending` | `unposted` | Payment not yet settled — waiting for the source system to finalise it |
 
 ---

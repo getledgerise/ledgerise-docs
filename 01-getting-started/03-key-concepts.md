@@ -149,13 +149,13 @@ The posting status tells you what Ledgerise has done with a transaction from the
 
 | Status | Meaning |
 |---|---|
-| `unposted` | Waiting for the next engine run |
-| `posted` | Journal entry was created and successfully submitted to the accounting system |
-| `unmapped` | No matching mapping rule found. Posted to the suspense account |
-| `failed` | Posting was attempted but the accounting system returned an error |
-| `retry_exhausted` | Failed and retried the maximum number of times. Requires manual action |
-| `duplicate` | A record with the same source ID was already posted. Skipped |
-| `cancelled` | The transaction was reversed before it was posted. No entry will be created |
+| `unposted` | Waiting for the next engine run. No journal entry exists yet. |
+| `generated` | Journal entry has been created. Submission to the accounting system is about to begin. |
+| `posting` | Submission in progress. Brief transient state. |
+| `posted` | Journal entry was created and successfully submitted to the accounting system. |
+| `unmapped` | No matching mapping rule found. Posted to the suspense account. |
+| `failed` | Posting was attempted but the accounting system returned an error. Ledgerise is retrying automatically. |
+| `retry_exhausted` | Failed and retried the maximum number of times. Requires manual action. |
 
 → See [transaction statuses](../03-transactions/06-transaction-statuses.md)
 

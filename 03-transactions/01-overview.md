@@ -58,13 +58,13 @@ Every transaction shows a posting status badge — a coloured label indicating w
 
 | Badge | Colour | Meaning |
 |---|---|---|
-| `unposted` | Grey | Waiting for the next engine run |
-| `posted` | Green | Journal entry created and submitted successfully |
-| `unmapped` | Amber | No matching rule found; posted to suspense account |
-| `failed` | Red | Posting attempted but accounting system returned an error |
-| `retry_exhausted` | Red | Failed after maximum retry attempts; manual action required |
-| `duplicate` | Grey | Already posted under the same source ID; skipped |
-| `cancelled` | Grey | Transaction reversed before posting; no entry created |
+| `unposted` | Grey | Waiting for the next engine run. No journal entry exists yet. |
+| `generated` | Grey | Journal entry created, submission about to begin. Brief transient state. |
+| `posting` | Grey | Submission in progress. Brief transient state. |
+| `posted` | Green | Journal entry created and submitted successfully. |
+| `unmapped` | Amber | No matching rule found; posted to suspense account. |
+| `failed` | Red | Posting attempted but accounting system returned an error. Retrying automatically. |
+| `retry_exhausted` | Red | Failed after maximum retry attempts; manual action required. |
 
 → Full explanations with action guidance: [transaction statuses](06-transaction-statuses.md)
 

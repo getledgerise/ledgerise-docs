@@ -72,7 +72,7 @@ Several environment variables in Ledgerise contain sensitive material:
 | `DATABASE_URL` | Critical | Full database access |
 | `LEDGERISE_CREDENTIALS_KEY` | Critical | Decrypts all stored adapter credentials |
 | `AUTH_TOKEN_SECRET` | Critical | Allows forging session tokens |
-| `AI_PROVIDER_KEY` (if set) | High | Unauthorized AI API usage billed to your account |
+| `AI_API_KEY` (if set) | High | Unauthorized AI API usage billed to your account |
 
 These variables must not appear in:
 - Source control (`.env` files committed to a repo)

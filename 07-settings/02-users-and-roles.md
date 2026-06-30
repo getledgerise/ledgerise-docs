@@ -23,12 +23,12 @@ The page shows all user accounts in your deployment with columns for name, email
 | Role | Transactions | Reconciliation | Mapping Rules | Journal Log | Settings |
 |---|---|---|---|---|---|
 | **Admin** | Full | Full | Full | Full | Full |
-| **Finance** | Full | Full | Full | Full | Read-only |
+| **Finance** | Full | Full | Full | Full | Read-only (Adapters, COA Reference, System only — not Users or Audit Log) |
 | **Auditor** | Read-only | Read-only | No access | Read-only | Audit Log only |
 
 **Admin** — full access to every page and every action, including system configuration, license management, and user management. At least one named Admin is required before going live.
 
-**Finance** — the role for Finance Officers and accountants. Full operational access: they can create and edit mapping rules, trigger engine runs, retry failed entries, run reconciliation, and resolve breaks. They cannot change system settings or manage user accounts.
+**Finance** — the role for Finance Officers and accountants. Full operational access: they can create and edit mapping rules, trigger engine runs, retry failed entries, run reconciliation, and resolve breaks. Within Settings, they have read-only access to Adapters, COA Reference, and System. They cannot access the Users or Audit Log tabs, and cannot change any settings.
 
 **Auditor** — read-only access to Transactions, Reconciliation, and Journal Log. Their only Settings access is the Audit Log tab. They cannot create, edit, or delete anything. Ledgerise does not show the Mapping Rules page to Auditor accounts at all.
 

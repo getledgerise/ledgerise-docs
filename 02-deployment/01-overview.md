@@ -28,7 +28,7 @@ You do not receive source code or a build context — only the compiled, version
 
 ## service architecture
 
-Both deployment paths run three Ledgerise services:
+The Ledgerise deployment runs three services:
 
 | Service | Purpose | Default port |
 |---|---|---|

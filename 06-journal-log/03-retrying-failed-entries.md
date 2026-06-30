@@ -93,6 +93,6 @@ You can retry one entry at a time from the table row, or open the detail drawer 
 
 ## entries that cannot be retried
 
-`posted` entries cannot be retried — the accounting system already accepted them. `cancelled` and `duplicate` entries will never post by design. `unmapped` entries need a mapping rule assigned first — use **Assign Rule** on the row.
+`posted` entries cannot be retried — the accounting system already accepted them. `unmapped` entries need a mapping rule assigned first — use **Assign Rule** on the row.
 
 → See [creating a rule](../05-mapping-rules/02-creating-a-rule.md) if you need to add a mapping rule for an unmapped entry

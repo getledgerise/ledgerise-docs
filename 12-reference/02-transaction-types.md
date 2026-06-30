@@ -1,6 +1,6 @@
 # transaction types
 
-The `type` field on every canonical transaction record uses dot notation: `category.subcategory` or `category.subcategory.detail`. There are 80 standard types across 10 categories. Custom types are permitted when a matching mapping rule exists.
+The `type` field on every canonical transaction record uses dot notation: `category.subcategory` or `category.subcategory.detail`. There are 84 standard types across 11 categories. Custom types are permitted when a matching mapping rule exists.
 
 The engine uses `type` together with `product.line`, `product.biller`, and `product.biller_category` to resolve the correct COA accounts. An unrecognised type without a mapping rule routes the transaction to the suspense account.
 

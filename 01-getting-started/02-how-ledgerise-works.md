@@ -153,7 +153,7 @@ Many payment systems have a test or sandbox environment. Transactions from a tes
 
 ### reversal handling
 
-When a transaction is reversed after its journal entry has already been posted, Ledgerise generates a mirror journal entry — the same amounts, but with debits and credits swapped — dated to the reversal date. If the original transaction had not yet been posted when the reversal arrived, it is simply cancelled. Nothing is ever left in an inconsistent state.
+When a transaction is reversed after its journal entry has already been posted, Ledgerise generates a mirror journal entry — the same amounts, but with debits and credits swapped — dated to the reversal date. If the original transaction had not yet been posted when the reversal arrived, no journal entry is created — the transaction's status updates to `reversed` and the engine will not pick it up, since only `completed` transactions are eligible for posting. Nothing is ever left in an inconsistent state.
 
 ---
 
