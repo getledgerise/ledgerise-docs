@@ -52,6 +52,7 @@ Before you begin, make sure you have:
 - Docker and Docker Compose installed on the server.
 - A PostgreSQL 14+ database accessible from the server.
 - Your Ledgerise commercial license key, provided during onboarding.
+- GitHub Container Registry access for the private Ledgerise image. Ledgerise provides the registry username `ledgerise-dev` and a personal access token during onboarding.
 - A hostname where users will open Ledgerise, for example `ledgerise.your-domain.com`.
 - A server proxy or hosting panel that can forward that hostname to `127.0.0.1:18080`.
 
@@ -152,7 +153,16 @@ Create `Caddyfile` in the same folder:
 }
 ```
 
-The image is public, so `docker login` is not required. Production use still requires a valid license key in Settings → System after first login.
+Ledgerise publishes this image privately in GitHub Container Registry. Before pulling it, sign in to GHCR on the server with the username and personal access token provided by Ledgerise:
+
+```bash
+read -rsp "Ledgerise GHCR PAT: " LEDGERISE_GHCR_PAT
+printf '\n'
+printf '%s' "$LEDGERISE_GHCR_PAT" | docker login ghcr.io -u ledgerise-dev --password-stdin
+unset LEDGERISE_GHCR_PAT
+```
+
+Paste the token when prompted; the terminal will not display it. Do not commit the personal access token to `docker-compose.yml`, `.env`, shell history, or deployment notes. The token is only for pulling the private image. Production use still requires a valid license key in Settings → System after first login.
 
 ---
 

@@ -22,6 +22,15 @@ First edit `.env` and change `LEDGERISE_IMAGE_TAG` to the version from the Ledge
 LEDGERISE_IMAGE_TAG=0.1.1
 ```
 
+The server must be authenticated to GitHub Container Registry before it can pull the private Ledgerise image. If this is the first upgrade from this server, or if `docker compose pull` returns an authorization error, sign in with the `ledgerise-dev` username and the personal access token provided by Ledgerise:
+
+```bash
+read -rsp "Ledgerise GHCR PAT: " LEDGERISE_GHCR_PAT
+printf '\n'
+printf '%s' "$LEDGERISE_GHCR_PAT" | docker login ghcr.io -u ledgerise-dev --password-stdin
+unset LEDGERISE_GHCR_PAT
+```
+
 Then run:
 
 ```bash

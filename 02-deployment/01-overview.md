@@ -14,12 +14,13 @@ Before deploying, have the following ready:
 - Credentials for your accounting system (for example, Zoho Books Client ID and Client Secret).
 - A domain name or internal hostname where users will open Ledgerise, for example `ledgerise.your-domain.com`.
 - A server proxy or hosting panel route that forwards that hostname to the local Ledgerise proxy port.
+- GitHub Container Registry access for the private Ledgerise image. Ledgerise provides the `ledgerise-dev` registry username and a personal access token during onboarding.
 
 ---
 
 ## deployment
 
-Ledgerise is deployed via Docker Compose. You use the public Ledgerise Docker image from GitHub Container Registry, configure a small set of environment variables, and run it with Docker Compose.
+Ledgerise is deployed via Docker Compose. You use the private Ledgerise Docker image from GitHub Container Registry, authenticate with the `ledgerise-dev` registry user and the personal access token provided by Ledgerise, configure a small set of environment variables, and run it with Docker Compose.
 
 The image includes the services and operational tools needed to run Ledgerise. Your license key controls production activation.
 
