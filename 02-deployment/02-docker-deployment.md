@@ -156,13 +156,10 @@ Create `Caddyfile` in the same folder:
 Ledgerise publishes this image privately in GitHub Container Registry. Before pulling it, sign in to GHCR on the server with the username and personal access token provided by Ledgerise:
 
 ```bash
-read -rsp "Ledgerise GHCR PAT: " LEDGERISE_GHCR_PAT
-printf '\n'
-printf '%s' "$LEDGERISE_GHCR_PAT" | docker login ghcr.io -u ledgerise-dev --password-stdin
-unset LEDGERISE_GHCR_PAT
+docker login ghcr.io -u ledgerise-dev
 ```
 
-Paste the token when prompted; the terminal will not display it. Do not commit the personal access token to `docker-compose.yml`, `.env`, shell history, or deployment notes. The token is only for pulling the private image. Production use still requires a valid license key in Settings → System after first login.
+When Docker prompts for a password, paste the personal access token provided by Ledgerise. The token is only for pulling the private image. Do not commit it to `docker-compose.yml`, `.env`, shell history, or deployment notes. Production use still requires a valid license key in Settings → System after first login.
 
 ---
 
